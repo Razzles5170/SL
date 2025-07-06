@@ -264,7 +264,7 @@ _G.StarLifeKeySystemUnload = ah
 if a6() then
 	aj()
 	aI()
-	a7("Key System", "Star Life Farmer Key System loaded!", 3)
+	a7("Key System", "Key System loaded!", 3)
 else
 	warn("Loader integrity compromised.")
 end
