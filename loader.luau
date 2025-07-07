@@ -3,6 +3,7 @@ local a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y,
 		return game:GetService(...)
 	end, Instance.new, pcall, ipairs, tostring, string.gsub, string.char, string.byte, table.concat, math.random, coroutine.wrap, wait, Color3.fromRGB, UDim2.new, Enum.Font, Enum.HttpContentType, Enum.UserInputType, Enum.UserInputState, Enum.TextYAlignment, getfenv, setfenv, loadstring
 
+
 local a_GetService = a
 local b_Instance_new = b
 local c_pcall = c
