@@ -3,7 +3,6 @@ local a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y,
 		return game:GetService(...)
 	end, Instance.new, pcall, ipairs, tostring, string.gsub, string.char, string.byte, table.concat, math.random, coroutine.wrap, wait, Color3.fromRGB, UDim2.new, Enum.Font, Enum.HttpContentType, Enum.UserInputType, Enum.UserInputState, Enum.TextYAlignment, getfenv, setfenv, loadstring
 
-
 local a_GetService = a
 local b_Instance_new = b
 local c_pcall = c
@@ -54,11 +53,10 @@ local function ab(ac)
 		return false, "Security check failed"
 	end
 	local ad, ae = c_pcall(function()
-		return game:HttpPost( -- Use game:HttpPost for client-side execution
+		return game:HttpPost(
 			a4 .. "/verify-key",
 			a0:JSONEncode({ key = ac, roblox_id = e_tostring(a3.UserId) }),
-			false, -- compress
-			p_HttpContentType.ApplicationJson
+			{ ["Content-Type"] = "application/json" } -- Pass headers as a table
 		)
 	end)
 	if ad then
@@ -193,7 +191,7 @@ local function aj()
 			ak:Destroy()
 			local ax, ay = c_pcall(function()
 				v_loadstring(
-					game:HttpGet("https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/main.luau", false)
+					game:HttpGet("https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/main.luau", true)
 				)()
 				_G.ScriptLoaded = true
 			end)
@@ -211,14 +209,20 @@ local function aj()
 		end
 	end)
 	ar.MouseButton1Click:Connect(function()
-		local az = c_pcall(setclipboard, a4)
-		if az then
-			as.Text =
-				"📋 Key link copied to clipboard!\nPaste it in your browser and follow the steps to get your key."
-			as.TextColor3 = m_Color3_fromRGB(100, 255, 100)
-			a7("Key System", "Key link copied to clipboard! Paste in browser to get your key.", 7)
+		if typeof(setclipboard) == "function" then
+			local az = c_pcall(setclipboard, a4)
+			if az then
+				as.Text =
+					"📋 Key link copied to clipboard!\nPaste it in your browser and follow the steps to get your key."
+				as.TextColor3 = m_Color3_fromRGB(100, 255, 100)
+				a7("Key System", "Key link copied to clipboard! Paste in browser to get your key.", 7)
+			else
+				as.Text = "❌ Clipboard not supported. Visit: " .. a4
+				as.TextColor3 = m_Color3_fromRGB(255, 200, 0)
+				a7("Key System", "Visit " .. a4 .. " to get your key", 7)
+			end
 		else
-			as.Text = "❌ Clipboard not supported. Visit: " .. a4
+			as.Text = "❌ Clipboard not available. Visit: " .. a4
 			as.TextColor3 = m_Color3_fromRGB(255, 200, 0)
 			a7("Key System", "Visit " .. a4 .. " to get your key", 7)
 		end
@@ -255,7 +259,7 @@ local function aI()
 				if not aJ then
 					warn("Key System: Key validation failed - " .. e_tostring(aK))
 					c_pcall(function()
-						game:HttpPost( -- Use game:HttpPost for client-side execution
+						game:HttpPost(
 							a4 .. "/log-key-validation",
 							a0:JSONEncode({
 								roblox_id = e_tostring(a3.UserId),
@@ -263,8 +267,7 @@ local function aI()
 								validation_result = "failed",
 								failure_reason = e_tostring(aK),
 							}),
-							false, -- compress
-							p_HttpContentType.ApplicationJson
+							{ ["Content-Type"] = "application/json" } -- Pass headers as a table
 						)
 					end)
 					ah()
