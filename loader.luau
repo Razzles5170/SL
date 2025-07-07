@@ -56,7 +56,7 @@ local function ab(ac)
 		return game:HttpPost(
 			a4 .. "/verify-key",
 			a0:JSONEncode({ key = ac, roblox_id = e_tostring(a3.UserId) }),
-			{ ["Content-Type"] = "application/json" } -- Pass headers as a table
+			"application/json" -- Pass content type as a string
 		)
 	end)
 	if ad then
@@ -267,7 +267,7 @@ local function aI()
 								validation_result = "failed",
 								failure_reason = e_tostring(aK),
 							}),
-							{ ["Content-Type"] = "application/json" } -- Pass headers as a table
+							"application/json" -- Pass content type as a string
 						)
 					end)
 					ah()
