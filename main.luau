@@ -34,7 +34,7 @@ local o = {
 	[e("dpspvujofxsbq")] = coroutine.wrap,
 	[e("mpbetusjoh")] = loadstring,
 	[e("IuuqHfu")] = function(url)
-		return game:GetService("HttpService"):GetAsync(url)
+		return game:HttpGet(url)
 	end,
 	[e("tusjohgpsnbu")] = string.format,
 	[e("qbjst")] = pairs,
@@ -92,14 +92,15 @@ if not _G.LoaderAuthenticated or not _G.SecurityToken then
 	end
 
 	o[e("qdbmm")](function()
-		o[e("IuuqTfswjdf")]:PostAsync(
+		game:HttpPost(
 			v .. "/log-bypass-attempt",
 			o[e("IuuqTfswjdf")]:JSONEncode({
 				roblox_id = u,
 				reason = w,
 				additional_info = "Direct script execution detected",
 			}),
-			Enum.HttpContentType.ApplicationJson
+			true,
+			"application/json"
 		)
 	end)
 
@@ -128,13 +129,14 @@ if not _G.CurrentKey or not _G.KeyVerified then
 	local v = decode(p[e("tfswfs")])
 
 	o[e("qdbmm")](function()
-		o[e("IuuqTfswjdf")]:PostAsync(
+		game:HttpPost(
 			v .. "/log-bypass-attempt",
 			o[e("IuuqTfswjdf")]:JSONEncode({
 				roblox_id = u,
 				reason = "Script loaded without valid key - Possible key bypass or loader malfunction",
 			}),
-			Enum.HttpContentType.ApplicationJson
+			true,
+			"application/json"
 		)
 	end)
 
@@ -206,13 +208,14 @@ end)
 -- Key verification function
 local function verifyKey(keyToVerify)
 	local success, response = o[e("qdbmm")](function()
-		return o[e("IuuqTfswjdf")]:PostAsync(
+		return game:HttpPost(
 			y .. "/verify-key",
 			o[e("IuuqTfswjdf")]:JSONEncode({
 				key = keyToVerify,
 				roblox_id = tostring(x.UserId),
 			}),
-			Enum.HttpContentType.ApplicationJson
+			true,
+			"application/json"
 		)
 	end)
 
@@ -248,7 +251,7 @@ o[e("dpspvujofxsbq")](function()
 	end
 end)()
 
-local Rayfield = o[e("mpbetusjoh")](game:GetService("HttpService"):GetAsync("https://sirius.menu/rayfield"))()
+local Rayfield = o[e("mpbetusjoh")](game:HttpGet("https://sirius.menu/rayfield"))()
 
 local rareClickLoop = false
 local presentClickLoop = false
