@@ -1,7 +1,7 @@
-local a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z = -- Fixed order
+local a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v = -- Fixed order
 	function(...)
 		return game:GetService(...)
-	end, Instance.new, pcall, ipairs, tostring, string.gsub, string.char, string.byte, table.concat, math.random, coroutine.wrap, wait, Color3.fromRGB, UDim2.new, Enum.Font, Enum.HttpContentType, Enum.UserInputType, Enum.UserInputState, Enum.TextYAlignment, getfenv, setfenv, loadstring
+	end, Instance.new, pcall, ipairs, tostring, string.gsub, string.char, string.byte, table.concat, math.random, coroutine.wrap, wait, Color3.fromRGB, UDim2.new, Enum.Font.GothamBold, Enum.HttpContentType.ApplicationJson, Enum.UserInputType.MouseButton1, Enum.UserInputState.End, Enum.TextYAlignment.Top, getfenv, setfenv, loadstring
 
 
 local a_GetService = a
@@ -20,8 +20,8 @@ local m_Color3_fromRGB = m
 local n_UDim2_new = n
 local o_Font = o
 local p_HttpContentType = p
-local q_UserInputType = q
-local r_UserInputState = r
+local q_UserInputType = Enum.UserInputType
+local r_UserInputState = Enum.UserInputState
 local s_TextYAlignment = s
 local t_getfenv = t
 local u_setfenv = u
@@ -56,8 +56,8 @@ local function ab(ac)
 	local ad, ae = c_pcall(function()
 		return game:HttpPost(
 			a4 .. "/verify-key",
-			a0:JSONEncode({ key = ac, roblox_userid = a3.UserId }), -- Use UserId to get actual username
-			"application/json" -- Pass content type as a string
+			a0:JSONEncode({ key = ac, roblox_userid = a3.UserId }),
+			"application/json"
 		)
 	end)
 	if ad then
@@ -263,13 +263,13 @@ local function aI()
 						game:HttpPost(
 							a4 .. "/log-key-validation",
 							a0:JSONEncode({
-								roblox_userid = a3.UserId, -- Use UserId to get actual username
+								roblox_userid = a3.UserId,
 								key = _G.CurrentKey,
 								validation_result = "failed",
 								failure_reason = e_tostring(aK),
 							}),
-							"application/json" -- Pass content type as a string
-						end)
+							"application/json"
+						)
 					end)
 					ah()
 					aj()
