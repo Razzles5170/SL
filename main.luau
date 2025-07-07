@@ -1,3 +1,5 @@
+
+
 local function decode(str)
 	local result = ""
 	for i = 1, #str do
@@ -19,7 +21,6 @@ local o = {
 	[e("hfuTfswjdf")] = function(s)
 		return game:GetService(s)
 	end,
-	[e("IuuqTfswjdf")] = game:GetService("HttpService"),
 	[e("Qmbzfst")] = game:GetService("Players"),
 	[e("TubsufsHvj")] = game:GetService("StarterGui"),
 	[e("SvoTfswjdf")] = game:GetService("RunService"),
@@ -66,8 +67,97 @@ local o = {
 	[e("HfuDijmesfo")] = function(obj)
 		return obj:GetChildren()
 	end,
-	[e("JtB")] = function(obj, class)
-		return obj:IsA(class)
+	[e("KTPOFodpef")] = function(data)
+		local function encode(obj)
+			local objType = type(obj)
+			if objType == "string" then
+				return '"' .. obj:gsub("\\", "\\\\"):gsub('"', '\\"') .. '"'
+			elseif objType == "number" then
+				return tostring(obj)
+			elseif objType == "boolean" then
+				return tostring(obj)
+			elseif objType == "table" then
+				local result = "{"
+				local first = true
+				for key, value in pairs(obj) do
+					if not first then
+						result = result .. ","
+					end
+					result = result .. encode(tostring(key)) .. ":" .. encode(value)
+					first = false
+				end
+				return result .. "}"
+			else
+				return "null"
+			end
+		end
+		return encode(data)
+	end,
+	[e("KTPOEfdpef")] = function(json)
+		local function decode(str)
+			local pos = 1
+			local function skip_whitespace()
+				while pos <= #str and str:sub(pos, pos):match("%s") do
+					pos = pos + 1
+				end
+			end
+			local function decode_value()
+				skip_whitespace()
+				local char = str:sub(pos, pos)
+				if char == '"' then
+					pos = pos + 1
+					local result = ""
+					while pos <= #str and str:sub(pos, pos) ~= '"' do
+						result = result .. str:sub(pos, pos)
+						pos = pos + 1
+					end
+					pos = pos + 1
+					return result
+				elseif char == "{" then
+					pos = pos + 1
+					local result = {}
+					skip_whitespace()
+					if str:sub(pos, pos) == "}" then
+						pos = pos + 1
+						return result
+					end
+					while true do
+						skip_whitespace()
+						local key = decode_value()
+						skip_whitespace()
+						if str:sub(pos, pos) == ":" then
+							pos = pos + 1
+						end
+						local value = decode_value()
+						result[key] = value
+						skip_whitespace()
+						if str:sub(pos, pos) == "}" then
+							pos = pos + 1
+							break
+						elseif str:sub(pos, pos) == "," then
+							pos = pos + 1
+						end
+					end
+					return result
+				elseif char:match("%d") or char == "-" then
+					local start = pos
+					while pos <= #str and str:sub(pos, pos):match("[%d%-%.e]") do
+						pos = pos + 1
+					end
+					return tonumber(str:sub(start, pos - 1))
+				elseif str:sub(pos, pos + 3) == "true" then
+					pos = pos + 4
+					return true
+				elseif str:sub(pos, pos + 4) == "false" then
+					pos = pos + 5
+					return false
+				else
+					return nil
+				end
+			end
+			return decode_value()
+		end
+		return decode(json)
 	end,
 }
 
@@ -94,7 +184,7 @@ if not _G.LoaderAuthenticated or not _G.SecurityToken then
 	o[e("qdbmm")](function()
 		game:HttpPost(
 			v .. "/log-bypass-attempt",
-			o[e("IuuqTfswjdf")]:JSONEncode({
+			o[e("KTPOFodpef")]({
 				roblox_id = u,
 				reason = w,
 				additional_info = "Direct script execution detected",
@@ -131,7 +221,7 @@ if not _G.CurrentKey or not _G.KeyVerified then
 	o[e("qdbmm")](function()
 		game:HttpPost(
 			v .. "/log-bypass-attempt",
-			o[e("IuuqTfswjdf")]:JSONEncode({
+			o[e("KTPOFodpef")]({
 				roblox_id = u,
 				reason = "Script loaded without valid key - Possible key bypass or loader malfunction",
 			}),
@@ -210,7 +300,7 @@ local function verifyKey(keyToVerify)
 	local success, response = o[e("qdbmm")](function()
 		return game:HttpPost(
 			y .. "/verify-key",
-			o[e("IuuqTfswjdf")]:JSONEncode({
+			o[e("KTPOFodpef")]({
 				key = keyToVerify,
 				roblox_id = tostring(x.UserId),
 			}),
@@ -220,7 +310,7 @@ local function verifyKey(keyToVerify)
 	end)
 
 	if success then
-		local data = o[e("IuuqTfswjdf")]:JSONDecode(response)
+		local data = o[e("KTPOEfdpef")](response)
 		return data.valid, data.reason
 	else
 		return false, "Failed to connect to server: " .. tostring(response)
