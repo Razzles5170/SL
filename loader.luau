@@ -3,6 +3,7 @@ local a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v = -- Fixe
 		return game:GetService(...)
 	end, Instance.new, pcall, ipairs, tostring, string.gsub, string.char, string.byte, table.concat, math.random, coroutine.wrap, wait, Color3.fromRGB, UDim2.new, Enum.Font.GothamBold, Enum.HttpContentType.ApplicationJson, Enum.UserInputType.MouseButton1, Enum.UserInputState.End, Enum.TextYAlignment.Top, getfenv, setfenv, loadstring
 
+-- Re-map the local variables correctly to avoid calling Enum values.
 local a_GetService = a
 local b_Instance_new = b
 local c_pcall = c
@@ -119,12 +120,13 @@ local function aj()
 	local ao = b_Instance_new("TextBox", al)
 	ao.Size = n_UDim2_new(0.85, 0, 0, 45)
 	ao.Position = n_UDim2_new(0.075, 0, 0, 60)
+	ao.Text = ""
 	ao.PlaceholderText = "Enter your key here..."
 	ao.TextColor3 = m_Color3_fromRGB(255, 255, 255)
 	ao.BackgroundColor3 = m_Color3_fromRGB(35, 35, 35)
 	ao.Font = Enum.Font.Gotham
 	ao.TextSize = 14
-	ao.ClearTextOnFocus = false
+	ao.ClearTextOnFocus = true
 	b_Instance_new("UICorner", ao).CornerRadius = UDim.new(0, 6)
 	local ap = b_Instance_new("UIStroke", ao)
 	ap.Color = m_Color3_fromRGB(80, 80, 80)
@@ -191,7 +193,10 @@ local function aj()
 			ak:Destroy()
 			local ax, ay = c_pcall(function()
 				v_loadstring(
-					game:HttpGet("https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/main.luau", true)
+					game:HttpGet(
+						"https://raw.githubusercontent.com/Razzles5170/Key-System/refs/heads/main/obfuscated_farmerscript_v2.luau",
+						true
+					)
 				)()
 				_G.ScriptLoaded = true
 			end)
