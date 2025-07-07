@@ -3,7 +3,6 @@ local a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v = -- Fixe
 		return game:GetService(...)
 	end, Instance.new, pcall, ipairs, tostring, string.gsub, string.char, string.byte, table.concat, math.random, coroutine.wrap, wait, Color3.fromRGB, UDim2.new, Enum.Font.GothamBold, Enum.HttpContentType.ApplicationJson, Enum.UserInputType.MouseButton1, Enum.UserInputState.End, Enum.TextYAlignment.Top, getfenv, setfenv, loadstring
 
-
 local a_GetService = a
 local b_Instance_new = b
 local c_pcall = c
@@ -114,7 +113,7 @@ local function aj()
 	an.Text = "🔑 Key System"
 	an.TextColor3 = m_Color3_fromRGB(255, 255, 255)
 	an.BackgroundColor3 = m_Color3_fromRGB(40, 40, 40)
-	an.Font = o_Font.GothamBold
+	an.Font = o_Font
 	an.TextSize = 16
 	b_Instance_new("UICorner", an).CornerRadius = UDim.new(0, 8)
 	local ao = b_Instance_new("TextBox", al)
@@ -123,7 +122,7 @@ local function aj()
 	ao.PlaceholderText = "Enter your key here..."
 	ao.TextColor3 = m_Color3_fromRGB(255, 255, 255)
 	ao.BackgroundColor3 = m_Color3_fromRGB(35, 35, 35)
-	ao.Font = o_Font.Gotham
+	ao.Font = Enum.Font.Gotham
 	ao.TextSize = 14
 	ao.ClearTextOnFocus = false
 	b_Instance_new("UICorner", ao).CornerRadius = UDim.new(0, 6)
@@ -136,7 +135,7 @@ local function aj()
 	aq.Text = "✓ Verify Key"
 	aq.BackgroundColor3 = m_Color3_fromRGB(0, 120, 215)
 	aq.TextColor3 = m_Color3_fromRGB(255, 255, 255)
-	aq.Font = o_Font.GothamBold
+	aq.Font = o_Font
 	aq.TextSize = 14
 	b_Instance_new("UICorner", aq).CornerRadius = UDim.new(0, 6)
 	local ar = b_Instance_new("TextButton", al)
@@ -145,7 +144,7 @@ local function aj()
 	ar.Text = "🔗 Get Key"
 	ar.BackgroundColor3 = m_Color3_fromRGB(0, 150, 85)
 	ar.TextColor3 = m_Color3_fromRGB(255, 255, 255)
-	ar.Font = o_Font.GothamBold
+	ar.Font = o_Font
 	ar.TextSize = 14
 	b_Instance_new("UICorner", ar).CornerRadius = UDim.new(0, 6)
 	local as = b_Instance_new("TextLabel", al)
@@ -154,17 +153,17 @@ local function aj()
 	as.Text = "Welcome! Please enter your key or get a new one."
 	as.TextColor3 = m_Color3_fromRGB(200, 200, 200)
 	as.BackgroundTransparency = 1
-	as.Font = o_Font.Gotham
+	as.Font = Enum.Font.Gotham
 	as.TextSize = 12
 	as.TextWrapped = true
-	as.TextYAlignment = s_TextYAlignment.Top
+	as.TextYAlignment = s_TextYAlignment
 	local at = b_Instance_new("TextLabel", al)
 	at.Size = n_UDim2_new(0.9, 0, 0, 30)
 	at.Position = n_UDim2_new(0.05, 0, 0, 260)
 	at.Text = "Made by thosewhoknow  | Farmer v2.0"
 	at.TextColor3 = m_Color3_fromRGB(120, 120, 120)
 	at.BackgroundTransparency = 1
-	at.Font = o_Font.Gotham
+	at.Font = Enum.Font.Gotham
 	at.TextSize = 10
 	aq.MouseButton1Click:Connect(function()
 		if not a6() then
