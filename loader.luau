@@ -3,7 +3,7 @@ local a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y,
 		return game:GetService(...)
 	end, Instance.new, pcall, ipairs, tostring, string.gsub, string.char, string.byte, table.concat, math.random, coroutine.wrap, wait, Color3.fromRGB, UDim2.new, Enum.Font, Enum.HttpContentType, Enum.UserInputType, Enum.UserInputState, Enum.TextYAlignment, getfenv, setfenv, loadstring
 
--- Re-map the local variables correctly to avoid calling Enum values.
+
 local a_GetService = a
 local b_Instance_new = b
 local c_pcall = c
@@ -54,7 +54,7 @@ local function ab(ac)
 		return false, "Security check failed"
 	end
 	local ad, ae = c_pcall(function()
-		return a0:PostAsync(
+		return game:HttpPost( -- Use game:HttpPost for client-side execution
 			a4 .. "/verify-key",
 			a0:JSONEncode({ key = ac, roblox_id = e_tostring(a3.UserId) }),
 			p_HttpContentType.ApplicationJson
@@ -252,7 +252,7 @@ local function aI()
 				if not aJ then
 					warn("Key System: Key validation failed - " .. e_tostring(aK))
 					c_pcall(function()
-						a0:PostAsync(
+						game:HttpPost( -- Use game:HttpPost for client-side execution
 							a4 .. "/log-key-validation",
 							a0:JSONEncode({
 								roblox_id = e_tostring(a3.UserId),
