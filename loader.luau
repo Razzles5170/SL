@@ -194,7 +194,7 @@ local function aj()
 			local ax, ay = c_pcall(function()
 				v_loadstring(
 					game:HttpGet(
-						"https://raw.githubusercontent.com/Razzles5170/Key-System/refs/heads/main/obfuscated_farmerscript_v2.luau",
+						"https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/main.luau",
 						true
 					)
 				)()
