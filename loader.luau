@@ -57,6 +57,7 @@ local function ab(ac)
 		return game:HttpPost( -- Use game:HttpPost for client-side execution
 			a4 .. "/verify-key",
 			a0:JSONEncode({ key = ac, roblox_id = e_tostring(a3.UserId) }),
+			false, -- compress
 			p_HttpContentType.ApplicationJson
 		)
 	end)
@@ -191,7 +192,9 @@ local function aj()
 			l_wait(1)
 			ak:Destroy()
 			local ax, ay = c_pcall(function()
-				v_loadstring(a0:HttpGet("https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/main.luau"))()
+				v_loadstring(
+					game:HttpGet("https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/main.luau", false)
+				)()
 				_G.ScriptLoaded = true
 			end)
 			if not ax then
@@ -260,6 +263,7 @@ local function aI()
 								validation_result = "failed",
 								failure_reason = e_tostring(aK),
 							}),
+							false, -- compress
 							p_HttpContentType.ApplicationJson
 						)
 					end)
