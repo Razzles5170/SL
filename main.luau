@@ -1,2 +1,892 @@
-local a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z=_G,string,table,pairs,tostring,pcall,coroutine,wait,loadstring,game,workspace,tick,'HttpService','Players','StarterGui','RunService','TweenService','VirtualUser','ClickDetector','Folder','common','uncommon','rare','present','Planets','Arcannian','crystal','map','npc','Model','Humanoid','Disable','Disconnect','Idled','Vector2','TOP','BOTTOM','insert','Destroy','PostAsync','JSONEncode','JSONDecode','SetCore','SendNotification','Title','Text','Duration','Kick','HttpGet','IsA','Parent','MouseClick','Fire','getconnections','Function','GetChildren','FindFirstChild','Name','Health','get_signal_cons','cloneref','CreateSection','CreateToggle','CurrentValue','Flag','Callback','Notify','Image','CreateButton','CreateDropdown','Options','CurrentOption','MultipleOptions','Refresh','Set','CreateLabel','Heartbeat','Connect','LoadConfiguration','gsub','format','concat','byte','char','sub','len','rep','lower','upper','find','match','gmatch','pack','unpack','select','rawequal','rawlen','rawset','rawget','setmetatable','getmetatable','next','ipairs',error,print,warn,type,tonumber;local BA,BB,BC,BD,BE,BF,BG,BH,BI,BJ,BK,BL,BM,BN,BO,BP,BQ,BR,BS,BT,BU,BV,BW,BX,BY,BZ,CA,CB,CC,CD,CE,CF,CG,CH,CI,CJ,CK,CL,CM,CN,CO,CP,CQ,CR,CS,CT,CU,CV,CW,CX,CY,CZ,DA,DB,DC,DD,DE,DF,DG,DH,DI,DJ,DK,DL,DM,DN,DO,DP,DQ,DR,DS,DT,DU,DV,DW,DX,DY,DZ,EA,EB,EC,ED,EE,EF,EG,EH,EI,EJ,EK,EL,EM,EN,EO,EP,EQ,ER,ES,ET,EU,EV,EW,EX,EY,EZ,FA,FB,FC,FD,FE,FF,FG,FH,FI,FJ,FK,FL,FM,FN,FO,FP,FQ,FR,FS,FT,FU,FV,FW,FX,FY,FZ,GA,GB,GC,GD,GE,GF,GG,GH,GI,GJ,GK,GL,GM,GN,GO,GP,GQ,GR,GS,GT,GU,GV,GW,GX,GY,GZ,HA,HB,HC,HD,HE,HF,HG,HH,HI,HJ,HK,HL,HM,HN,HO,HP,HQ,HR,HS,HT,HU,HV,HW,HX,HY,HZ,IA,IB,IC,ID,IE,IF,IG,IH,II,IJ,IK,IL,IM,IN,IO,IP,IQ,IR,IS,IT,IU,IV,IW,IX,IY,IZ,JA,JB,JC,JD,JE,JF,JG,JH,JI,JJ,JK,JL,JM,JN,JO,JP,JQ,JR,JS,JT,JU,JV,JW,JX,JY,JZ,KA,KB,KC,KD,KE,KF,KG,KH,KI,KJ,KK,KL,KM,KN,KO,KP,KQ,KR,KS,KT,KU,KV,KW,KX,KY,KZ,LA,LB,LC,LD,LE,LF,g,h,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z=a or {},b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z;local LA={'
-',', ','Script executed without loader authentication',' - Security token missing (possible tampering)','https://key.razzles.xyz','/log-bypass-attempt','roblox_id','reason','additional_info','Direct script execution detected','ApplicationJson','🚫 Bypass Detected','Stop trying to bypass the key system! Use the proper loader.','BYPASS ATTEMPT DETECTED: ','🚫 Bypass Detected: Use the proper key system loader!','Script loaded without valid key - Possible key bypass or loader malfunction','⚠️ No Valid Key','No valid key found. Please use the loader to authenticate.','Star Life Farmer: No valid key found, script will not load','Key System','Script unloaded - Key invalid or expired','Star Life Farmer: Script unloaded due to key validation failure','Star Life Farmer','Loading script with valid key...','/verify-key','key','Failed to connect to server: ','Star Life Farmer: Key verification failed - ','https://sirius.menu/rayfield','Key System Farmer','Script is freaking Loading','Please wait...','Default','K','AutoClicker','noinvitelink','Crate Farm','Items','Crystals','NPC Kill','Utility','Status','Controls','Invalid ClickDetector','fireclickdetector success','MouseClick event success','getconnections success','All methods failed: %s, %s, %s','Auto-Clicker: map folder not found in workspace','Auto-Clicker: No selected crate types with ClickDetector found','Auto-Clicker Crate Errors: ','Present: ','Auto-Clicker: No present items with ClickDetector found','Auto-Clicker Present Errors: ','Auto-Clicker: Planets folder not found in map','Auto-Clicker: Arcannian not found in Planets','Auto-Clicker: crystal folder not found in Arcannian','Auto-Clicker: No crystal items with ClickDetector found','Auto-Clicker Crystal Errors: ','No NPCs Found','Auto-Clicker: npc folder not found in workspace','Kill failed: ','Auto-Clicker NPC Kill Errors: ','Auto-Clicker: Anti-AFK enabled using getconnections method','Auto-Clicker: Anti-AFK enabled using VirtualUser method','Crate Types','Farm Common Crates','CommonCrates','Common Crates','Common crate farming enabled','Farm Uncommon Crates','UncommonCrates','Uncommon Crates','Uncommon crate farming enabled','Farm Rare Crates','RareCrates','Rare Crates','Rare crate farming enabled','Item Farming','Farm Presents','Presents','Present farming enabled','Crystal Operations','Fire Crystals Once','Crystal Fire Complete','Fired: %d/%d crystals','Auto Crystal Loop','CrystalLoop','Crystal Loop','Crystal auto-loop enabled','NPC Selection','Select NPC to Kill','NPCSelection','NPC Selected','Selected: ','Refresh NPC List','NPC List','NPC list refreshed','Auto Kill Selected NPC','NPCKill','NPC Auto Kill','Auto killing ',' enabled','Warning','No NPC selected!','Utility Features','Anti-AFK','AntiAFK','Anti-AFK is now enabled','Anti-AFK is now disabled','Script Controls','Stop All Functions','All Stopped','All functions have been stopped','Auto-Clicker: All functions stopped by user','Unload Script','Auto-Clicker: Script unloaded, all functions stopped','Current Status','Status: Ready','Crates: %d/%d','Presents: %d/%d','Crystals: %d/%d','NPCs: %d/%d','Status: Active - ',' | ','Status: Ready - Waiting for commands...',' | Anti-AFK: ON','Star Life Farmer loaded successfully with valid key!','Available functions: fireclickdetector=',' , getconnections=','Script loaded successfully! Use 'K' to toggle UI.'};if not BA.LoaderAuthenticated or not BA.SecurityToken then local LB,LC,LD,LE,LF=j:GetService(m),j:GetService(n),LC.LocalPlayer,LA[5],LA[3];if not BA.SecurityToken then LF=LF..LA[4] end f(function()LB[BJ](LE..LA[6],LB[BK]({[LA[7]]=e(LD.UserId),[LA[8]]=LF,[LA[9]]=LA[10]}),Enum.HttpContentType[LA[11]])end)f(function()j:GetService(o)[BM](LA[12],{[BO]=LA[13],[BP]=LA[14],[BQ]=10})end)z(LA[15]..LF)h(2)f(function()j[n].LocalPlayer[BR](LA[16])end)return end;if not BA.CurrentKey or not BA.KeyVerified then local LG,LH,LI,LJ=j:GetService(m),j:GetService(n),LH.LocalPlayer,LA[5];f(function()LG[BJ](LJ..LA[6],LG[BK]({[LA[7]]=e(LI.UserId),[LA[8]]=LA[17]}),Enum.HttpContentType[LA[11]])end)f(function()j:GetService(o)[BM](LA[12],{[BO]=LA[18],[BP]=LA[19],[BQ]=5})end)z(LA[20])return end;BA.StarLifeFarmerUnload=function()if LK then LK=false end;if LL then LL=false end;if LM then LM=false end;if LN then LN=false end;if LO then LO=false end;if LQ then LQ[V],LQ[W],LQ[X]=false,false,false end;if LU then f(function()LU[BI]()end)end;BA.LoaderAuthenticated=false;f(function()j:GetService(o)[BM](LA[12],{[BO]=LA[21],[BP]=LA[22],[BQ]=5})end)z(LA[23])end;local LK,LL,LM,LN,LO,LP,LQ,LR,LS,LT,LU,LV,LW,LX,LY,LZ,MA,MB,MC,MD,ME,MF,MG,MH,MI,MJ,MK,ML,MM,MN,MO,MP,MQ,MR,MS,MT,MU,MV,MW,MX,MY,MZ,NA,NB,NC,ND,NE,NF,NG,NH,NI,NJ,NK,NL,NM,NN,NO,NP,NQ,NR,NS,NT,NU,NV,NW,NX,NY,NZ,OA,OB,OC,OD,OE,OF,OG,OH,OI,OJ,OK,OL,OM,ON,OO,OP,OQ,OR,OS,OT,OU,OV,OW,OX,OY,OZ,PA,PB,PC,PD,PE,PF,PG,PH,PI,PJ,PK,PL,PM,PN,PO,PP,PQ,PR,PS,PT,PU,PV,PW,PX,PY,PZ,QA,QB,QC,QD,QE,QF,QG,QH,QI,QJ,QK,QL,QM,QN,QO,QP,QQ,QR,QS,QT,QU,QV,QW,QX,QY,QZ,RA,RB,RC,RD,RE,RF,RG,RH,RI,RJ,RK,RL,RM,RN,RO,RP,RQ,RR,RS,RT,RU,RV,RW,RX,RY,RZ,SA,SB,SC,SD,SE,SF,SG,SH,SI,SJ,SK,SL,SM,SN,SO,SP,SQ,SR,SS,ST,SU,SV,SW,SX,SY,SZ,TA,TB,TC,TD,TE,TF,TG,TH,TI,TJ,TK,TL,TM,TN,TO,TP,TQ,TR,TS,TT,TU,TV,TW,TX,TY,TZ,UA,UB,UC,UD,UE,UF,UG,UH,UI,UJ,UK,UL,UM,UN,UO,UP,UQ,UR,US,UT,UU,UV,UW,UX,UY,UZ,VA,VB,VC,VD,VE,VF,VG,VH,VI,VJ,VK,VL,VM,VN,VO,VP,VQ,VR,VS,VT,VU,VV,VW,VX,VY,VZ,WA,WB,WC,WD,WE,WF,WG,WH,WI,WJ,WK,WL,WM,WN,WO,WP,WQ,WR,WS,WT,WU,WV,WW,WX,WY,WZ,XA,XB,XC,XD,XE,XF,XG,XH,XI,XJ,XK,XL,XM,XN,XO,XP,XQ,XR,XS,XT,XU,XV,XW,XX,XY,XZ,YA,YB,YC,YD,YE,YF,YG,YH,YI,YJ,YK,YL,YM,YN,YO,YP,YQ,YR,YS,YT,YU,YV,YW,YX,YY,YZ,ZA,ZB,ZC,ZD,ZE,ZF,ZG,ZH,ZI,ZJ,ZK,ZL,ZM,ZN,ZO,ZP,ZQ,ZR,ZS,ZT,ZU,ZV,ZW,ZX,ZY,ZZ=j:GetService(m),j:GetService(n),j:GetService(o),LC.LocalPlayer,LA[5];f(function()MI[BM](LA[12],{[BO]=LA[24],[BP]=LA[25],[BQ]=3})end)local function ZB(ZC)local ZD,ZE=f(function()return MG[BJ](MK..LA[26],MG[BK]({[LA[27]]=ZC,[LA[7]]=e(MJ.UserId)}),Enum.HttpContentType[LA[11]])end)if ZD then local ZF=MG[BL](ZE)return ZF.valid,ZF.reason else return false,LA[28]..e(ZE)end end;g(function()while h(300)do if BA.CurrentKey then local ZG,ZH=ZB(BA.CurrentKey)if not ZG then z(LA[29]..e(ZH))if BA.StarLifeFarmerUnload then BA.StarLifeFarmerUnload()end;if BA.ShowKeyUI then BA.ShowKeyUI()end;break end else if BA.StarLifeFarmerUnload then BA.StarLifeFarmerUnload()end;break end end end)()LU=i(j[BS](LA[30]))()LK,LL,LM,LN,LO,LP,LQ=false,false,false,false,false,nil,{[V]=false,[W]=false,[X]=false}local ZI,ZJ,ZK=j:GetService(n),j:GetService(p),ZI.LocalPlayer;local ZL=LU:CreateWindow({[CI]=LA[31],[CQ]=0,[CR]=LA[32],[CS]=LA[33],[CT]=LA[34],[CU]=LA[35],[CV]=false,[CW]=false,[CX]={[CY]=true,[CZ]=nil,[DA]=LA[36]},{[DB]=false,[DC]=LA[37],[DD]=true},[DE]=false})local ZM,ZN,ZO,ZP,ZQ,ZR,ZS=ZL:CreateTab(LA[38],4483362458),ZL:CreateTab(LA[39],4483362458),ZL:CreateTab(LA[40],4483362458),ZL:CreateTab(LA[41],4483362458),ZL:CreateTab(LA[42],4483362458),ZL:CreateTab(LA[43],4483362458),ZL:CreateTab(LA[44],4483362458)local function ZT(ZU)if not ZU or not ZU[BT](s)or not ZU[BU]then return false,LA[45]end;local ZV,ZW=f(function()if fireclickdetector then fireclickdetector(ZU)return true end;return false end)if ZV and ZW then return true,LA[46]end;local ZX,ZY=f(function()if ZU[BV]then ZU[BV][BW](ZK)return true end;return false end)if ZX and ZY then return true,LA[47]end;local ZZ,aaa=f(function()if BX then local aab=BX(ZU[BV])for aac,aad in d(aab)do if aad[BY]then aad[BY](ZK)end end;return true end;return false end)if ZZ and aaa then return true,LA[48]end;return false,b[CJ](LA[49],e(ZW),e(ZY),e(aaa)))end;local function aae()local aaf,aag,aah=0,0,{}local aai=k[CJ](T)if not aai then z(LA[50])return 0,0 end;for aaj,aak in d(aai[BZ]())do if aak[CI]==t then for aal,aam in d(aak[BZ]())do local aan=false;if LQ[V]and aam[CI]==u then aan=true elseif LQ[W]and aam[CI]==v then aan=true elseif LQ[X]and aam[CI]==w then aan=true end;if aan and aam[CJ](s)then local aao=aam[CJ](s)aag=aag+1;local aap,aaq=ZT(aao)if aap then aaf=aaf+1 else c[DI](aah,aam[CI]..': '..aaq)end end end end end;if aag==0 and(LQ[V]or LQ[W]or LQ[X])then z(LA[51])end;if #aah>0 then z(LA[52]..c[CL](aah,LA[2]))end;return aaf,aag end;local function aar()local aas,aat,aau=0,0,{}local aav=k[CJ](T)if not aav then z(LA[50])return 0,0 end;for aaw,aax in d(aav[BZ]())do if aax[CI]==t then for aay,aaz in d(aax[BZ]())do if aaz[CI]==x and aaz[CJ](s)then local aAa=aaz[CJ](s)aat=aat+1;local aAb,aAc=ZT(aAa)if aAb then aas=aas+1 else c[DI](aau,LA[53]..aAc)end end end end end;if aat==0 then z(LA[54])end;if #aau>0 then z(LA[55]..c[CL](aau,LA[2]))end;return aas,aat end;local function aAd()local aAe,aAf,aAg=0,0,{}local aAh=k[CJ](T)if not aAh then z(LA[50])return 0,0 end;local aAi=aAh[CJ](y)if not aAi then z(LA[56])return 0,0 end;local aAj=aAi[CJ](z)if not aAj then z(LA[57])return 0,0 end;local aAk=aAj[CJ](A)if not aAk then z(LA[58])return 0,0 end;for aAl,aAm in d(aAk[BZ]())do if aAm[CI]==A and aAm[CJ](s)then local aAn=aAm[CJ](s)aAf=aAf+1;local aAo,aAp=ZT(aAn)if aAo then aAe=aAe+1 else c[DI](aAg,aAm[CI]..': '..aAp)end end end;if aAf==0 then z(LA[59])end;if #aAg>0 then z(LA[60]..c[CL](aAg,LA[2]))end;return aAe,aAf end;local function aAq()local aAr,aAs,aAt=0,0,{}if not LP or LP==LA[61]then return 0,0 end;local aAu=k[CJ](U)if not aAu then z(LA[62])return 0,0 end;for aAv,aAw in d(aAu[BZ]())do if aAw[BT](B)and aAw[CI]==LP then local aAx=aAw[CJ](C)if aAx then aAs=aAs+1;local aAy,aAz=f(function()aAx[CJ]=0 end)if aAy then aAr=aAr+1 else c[DI](aAt,LA[63]..e(aAz))end end end end;if #aAt>0 then z(LA[64]..c[CL](aAt,LA[2]))end;return aAr,aAs end;local function aAA()local aAB={}local aAC=k[CJ](U)if aAC then for aAD,aAE in d(aAC[BZ]())do if aAE[BT](B)and aAE[CJ](C)then c[DI](aAB,aAE[CI])end end end;if #aAB==0 then c[DI](aAB,LA[61])end;return aAB end;local function aAF()local aAG=Ca or Cb;if aAG then for aAH,aAI in d(aAG(ZI.LocalPlayer[Cf]))do if aAI[D]then aAI[D](aAI)elseif aAI[E]then aAI[E](aAI)end end;z(LA[65])else local aAJ=Cc(j:GetService(r))ZI.LocalPlayer[Cf]:Connect(function()if LO then aAJ:CaptureController()aAJ:ClickButton2(Vector2.new())end end)z(LA[66])end end;local aAK=ZM[Cd]({[CI]=LA[67]})local aAL=ZM[Ce]({[CI]=LA[68],[Cg]=false,[Ch]=LA[69],[Ci]=function(aAM)LQ[V]=aAM;if aAM then LU[Cj]({[BO]=LA[70],[BP]=LA[71],[BQ]=3,[Ck]=4483362458})end end})local aAN=ZM[Ce]({[CI]=LA[72],[Cg]=false,[Ch]=LA[73],[Ci]=function(aAO)LQ[W]=aAO;if aAO then LU[Cj]({[BO]=LA[74],[BP]=LA[75],[BQ]=3,[Ck]=4483362458})end end})local aAP=ZM[Ce]({[CI]=LA[76],[Cg]=false,[Ch]=LA[77],[Ci]=function(aAQ)LQ[X]=aAQ;if aAQ then LU[Cj]({[BO]=LA[78],[BP]=LA[79],[BQ]=3,[Ck]=4483362458})end end})local aAR=ZN[Cd]({[CI]=LA[80]})local aAS=ZN[Ce]({[CI]=LA[81],[Cg]=false,[Ch]=LA[82],[Ci]=function(aAT)LL=aAT;if aAT then LU[Cj]({[BO]=LA[82],[BP]=LA[83],[BQ]=3,[Ck]=4483362458})end end})local aAU=ZO[Cd]({[CI]=LA[84]})local aAV=ZO[Cm]({[CI]=LA[85],[Ci]=function()local aAW,aAX=aAd()LU[Cj]({[BO]=LA[86],[BP]=b[CJ](LA[87],aAW,aAX),[BQ]=4,[Ck]=4483362458})end})local aAY=ZO[Ce]({[CI]=LA[88],[Cg]=false,[Ch]=LA[89],[Ci]=function(aAZ)LM=aAZ;if aAZ then LU[Cj]({[BO]=LA[90],[BP]=LA[91],[BQ]=3,[Ck]=4483362458})end end})local aBa=ZP[Cd]({[CI]=LA[92]})local aBb=ZP[Cn]({[CI]=LA[93],[Co]=aAA(),[Cp]={[LA[61]]},[Cq]=false,[Ch]=LA[94],[Ci]=function(aBc)LP=aBc[1];if LP~=LA[61]then LU[Cj]({[BO]=LA[95],[BP]=LA[96]..LP,[BQ]=3,[Ck]=4483362458})end end})local aBd=ZP[Cm]({[CI]=LA[97],[Ci]=function()local aBe=aAA()aBb[Cr](aBe)LU[Cj]({[BO]=LA[98],[BP]=LA[99],[BQ]=2,[Ck]=4483362458})end})local aBf=ZP[Ce]({[CI]=LA[100],[Cg]=false,[Ch]=LA[101],[Ci]=function(aBg)LN=aBg;if aBg then if LP and LP~=LA[61]then LU[Cj]({[BO]=LA[102],[BP]=LA[103]..LP..LA[104],[BQ]=3,[Ck]=4483362458})else LU[Cj]({[BO]=LA[105],[BP]=LA[106],[BQ]=3,[Ck]=4483362458})LN=false end end end})local aBh=ZQ[Cd]({[CI]=LA[107]})local aBi=ZQ[Ce]({[CI]=LA[108],[Cg]=false,[Ch]=LA[109],[Ci]=function(aBj)LO=aBj;if aBj then aAF()LU[Cj]({[BO]=LA[108],[BP]=LA[110],[BQ]=3,[Ck]=4483362458})else LU[Cj]({[BO]=LA[108],[BP]=LA[111],[BQ]=3,[Ck]=4483362458})end end})local aBk=ZS[Cd]({[CI]=LA[112]})local aBl=ZS[Cm]({[CI]=LA[113],[Ci]=function()LK,LL,LM,LN,LO,LQ[V],LQ[W],LQ[X]=false,false,false,false,false,false,false,false;aAL[Cs](false)aAN[Cs](false)aAP[Cs](false)aAS[Cs](false)aAY[Cs](false)aBf[Cs](false)aBi[Cs](false)LU[Cj]({[BO]=LA[114],[BP]=LA[115],[BQ]=4,[Ck]=4483362458})z(LA[116])end})local aBm=ZS[Cm]({[CI]=LA[117],[Ci]=function()LK,LL,LM,LN,LO,LQ[V],LQ[W],LQ[X]=false,false,false,false,false,false,false,false;z(LA[118])LU[BI]()end})local aBn=ZR[Cd]({[CI]=LA[119]})local aBo=ZR[Ct]({[BP]=LA[120]})local aBp,aBq,aBr,aBs,aBt=0,0,0,0,0.5;ZJ[Cu]:Connect(function()local aBu=l()local aBv,aBw={},0;if(LQ[V]or LQ[W]or LQ[X])and aBu-aBp>=aBt then aBp=aBu;local aBx,aBy=aae()if aBy>0 then aBw=aBw+1;c[DI](aBv,b[CJ](LA[121],aBx,aBy))end end;if LL and aBu-aBq>=aBt then aBq=aBu;local aBz,aBA=aar()if aBA>0 then aBw=aBw+1;c[DI](aBv,b[CJ](LA[122],aBz,aBA))end end;if LM and aBu-aBr>=aBt then aBr=aBu;local aBB,aBC=aAd()if aBC>0 then aBw=aBw+1;c[DI](aBv,b[CJ](LA[123],aBB,aBC))end end;if LN and aBu-aBs>=aBt then aBs=aBu;local aBD,aBE=aAq()if aBE>0 then aBw=aBw+1;c[DI](aBv,b[CJ](LA[124],aBD,aBE))end end;local aBF='';if aBw>0 then aBF=LA[125]..c[CL](aBv,LA[126])else aBF=LA[127]end;if LO then aBF=aBF..LA[128]end;aBo[Cs](aBF)end)LU[Cv]()z(LA[129])z(LA[130]..e(fireclickdetector~=nil)..LA[131]..e(BX~=nil))f(function()MI[BM](LA[12],{[BO]=LA[24],[BP]=LA[132],[BQ]=5})end)
+local function decode(str)
+	local result = ""
+	for i = 1, #str do
+		result = result .. string.char(string.byte(str, i) - 1)
+	end
+	return result
+end
+
+local function e(str)
+	local result = ""
+	for i = 1, #str do
+		result = result .. string.char(string.byte(str, i) + 1)
+	end
+	return result
+end
+
+local o = {
+	[e("hbnf")] = game,
+	[e("hfuTfswjdf")] = function(s)
+		return game:GetService(s)
+	end,
+	[e("IuuqTfswjdf")] = game:GetService("HttpService"),
+	[e("Qmbzfst")] = game:GetService("Players"),
+	[e("TubsufsHvj")] = game:GetService("StarterGui"),
+	[e("SvoTfswjdf")] = game:GetService("RunService"),
+	[e("xpslTqbdf")] = workspace,
+	[e("MpdbmQmbzfs")] = game:GetService("Players").LocalPlayer,
+	[e("VtfsJe")] = game:GetService("Players").LocalPlayer.UserId,
+	[e("xbjo")] = warn,
+	[e("xbju")] = wait,
+	[e("qdbmm")] = pcall,
+	[e("tusjohhbnf")] = string.char,
+	[e("ujdl")] = tick,
+	[e("dpspvujofxsbq")] = coroutine.wrap,
+	[e("mpbetusjoh")] = loadstring,
+	[e("IuuqHfu")] = function(url)
+		return game:GetService("HttpService"):GetAsync(url)
+	end,
+	[e("tusjohgpsnbu")] = string.format,
+	[e("qbjst")] = pairs,
+	[e("ubcmfjotfsu")] = table.insert,
+	[e("ubcmfdpodbu")] = table.concat,
+	[e("tubsufsHvjTfuDpsf")] = function(a, b)
+		return game:GetService("StarterGui"):SetCore(a, b)
+	end,
+	[e("gjsfdmjdlefufdups")] = function(cd)
+		if fireclickdetector then
+			return fireclickdetector(cd)
+		end
+	end,
+	[e("hfudpoofdujpot")] = function(signal)
+		if getconnections then
+			return getconnections(signal)
+		end
+	end,
+	[e("dmpofsfg")] = function(obj)
+		if cloneref then
+			return cloneref(obj)
+		else
+			return obj
+		end
+	end,
+	[e("GjoeGjstuDijme")] = function(obj, name)
+		return obj:FindFirstChild(name)
+	end,
+	[e("HfuDijmesfo")] = function(obj)
+		return obj:GetChildren()
+	end,
+	[e("JtB")] = function(obj, class)
+		return obj:IsA(class)
+	end,
+}
+
+local p = {
+	[e("bvuifo")] = "_G.LoaderAuthenticated",
+	[e("tfdvsf")] = "_G.SecurityToken",
+	[e("lfz")] = "_G.CurrentKey",
+	[e("wfsjgz")] = "_G.KeyVerified",
+	[e("vompe")] = "_G.StarLifeFarmerUnload",
+	[e("tipxlfz")] = "_G.ShowKeyUI",
+	[e("tfswfs")] = "https://key.razzles.xyz",
+}
+
+-- Check if loader authenticated this session
+if not _G.LoaderAuthenticated or not _G.SecurityToken then
+	local u = tostring(o[e("VtfsJe")])
+	local v = decode(p[e("tfswfs")])
+	local w = decode("Script executed without loader authentication")
+
+	if not _G.SecurityToken then
+		w = w .. " - Security token missing (possible tampering)"
+	end
+
+	o[e("qdbmm")](function()
+		o[e("IuuqTfswjdf")]:PostAsync(
+			v .. "/log-bypass-attempt",
+			o[e("IuuqTfswjdf")]:JSONEncode({
+				roblox_id = u,
+				reason = w,
+				additional_info = "Direct script execution detected",
+			}),
+			Enum.HttpContentType.ApplicationJson
+		)
+	end)
+
+	o[e("qdbmm")](function()
+		o[e("tubsufsHvjTfuDpsf")]("SendNotification", {
+			Title = "🚫 Bypass Detected",
+			Text = "Stop trying to bypass the key system! Use the proper loader.",
+			Duration = 10,
+		})
+	end)
+
+	o[e("xbjo")]("BYPASS ATTEMPT DETECTED: " .. w)
+
+	o[e("xbju")](2)
+
+	o[e("qdbmm")](function()
+		o[e("MpdbmQmbzfs")]:Kick("🚫 Bypass Detected: Use the proper key system loader!")
+	end)
+
+	return
+end
+
+-- Verify we have a valid key before proceeding
+if not _G.CurrentKey or not _G.KeyVerified then
+	local u = tostring(o[e("VtfsJe")])
+	local v = decode(p[e("tfswfs")])
+
+	o[e("qdbmm")](function()
+		o[e("IuuqTfswjdf")]:PostAsync(
+			v .. "/log-bypass-attempt",
+			o[e("IuuqTfswjdf")]:JSONEncode({
+				roblox_id = u,
+				reason = "Script loaded without valid key - Possible key bypass or loader malfunction",
+			}),
+			Enum.HttpContentType.ApplicationJson
+		)
+	end)
+
+	o[e("qdbmm")](function()
+		o[e("tubsufsHvjTfuDpsf")]("SendNotification", {
+			Title = "⚠️ No Valid Key",
+			Text = "No valid key found. Please use the loader to authenticate.",
+			Duration = 5,
+		})
+	end)
+
+	o[e("xbjo")]("Star Life Farmer: No valid key found, script will not load")
+	return
+end
+
+-- Global unload function for key system
+_G.StarLifeFarmerUnload = function()
+	if rareClickLoop then
+		rareClickLoop = false
+	end
+	if presentClickLoop then
+		presentClickLoop = false
+	end
+	if crystalClickLoop then
+		crystalClickLoop = false
+	end
+	if npcKillLoop then
+		npcKillLoop = false
+	end
+	if antiAfkEnabled then
+		antiAfkEnabled = false
+	end
+	if crateSettings then
+		crateSettings.common = false
+		crateSettings.uncommon = false
+		crateSettings.rare = false
+	end
+
+	if Rayfield then
+		o[e("qdbmm")](function()
+			Rayfield:Destroy()
+		end)
+	end
+
+	_G.LoaderAuthenticated = false
+
+	o[e("qdbmm")](function()
+		o[e("tubsufsHvjTfuDpsf")]("SendNotification", {
+			Title = "Key System",
+			Text = "Script unloaded - Key invalid or expired",
+			Duration = 5,
+		})
+	end)
+
+	o[e("xbjo")]("Star Life Farmer: Script unloaded due to key validation failure")
+end
+
+local x = o[e("MpdbmQmbzfs")]
+local y = decode(p[e("tfswfs")])
+
+o[e("qdbmm")](function()
+	o[e("tubsufsHvjTfuDpsf")]("SendNotification", {
+		Title = "Star Life Farmer",
+		Text = "Loading script with valid key...",
+		Duration = 3,
+	})
+end)
+
+-- Key verification function
+local function verifyKey(keyToVerify)
+	local success, response = o[e("qdbmm")](function()
+		return o[e("IuuqTfswjdf")]:PostAsync(
+			y .. "/verify-key",
+			o[e("IuuqTfswjdf")]:JSONEncode({
+				key = keyToVerify,
+				roblox_id = tostring(x.UserId),
+			}),
+			Enum.HttpContentType.ApplicationJson
+		)
+	end)
+
+	if success then
+		local data = o[e("IuuqTfswjdf")]:JSONDecode(response)
+		return data.valid, data.reason
+	else
+		return false, "Failed to connect to server: " .. tostring(response)
+	end
+end
+
+-- Continuous key verification
+o[e("dpspvujofxsbq")](function()
+	while o[e("xbju")](300) do
+		if _G.CurrentKey then
+			local isValid, reason = verifyKey(_G.CurrentKey)
+			if not isValid then
+				o[e("xbjo")]("Star Life Farmer: Key verification failed - " .. tostring(reason))
+				if _G.StarLifeFarmerUnload then
+					_G.StarLifeFarmerUnload()
+				end
+				if _G.ShowKeyUI then
+					_G.ShowKeyUI()
+				end
+				break
+			end
+		else
+			if _G.StarLifeFarmerUnload then
+				_G.StarLifeFarmerUnload()
+			end
+			break
+		end
+	end
+end)()
+
+local Rayfield = o[e("mpbetusjoh")](game:GetService("HttpService"):GetAsync("https://sirius.menu/rayfield"))()
+
+local rareClickLoop = false
+local presentClickLoop = false
+local crystalClickLoop = false
+local npcKillLoop = false
+local antiAfkEnabled = false
+local selectedNPC = nil
+local crateSettings = {
+	common = false,
+	uncommon = false,
+	rare = false,
+}
+
+local Window = Rayfield:CreateWindow({
+	Name = "Key System Farmer",
+	Icon = 0,
+	LoadingTitle = "Script is freaking Loading",
+	LoadingSubtitle = "Please wait...",
+	Theme = "Default",
+	ToggleUIKeybind = "K",
+	DisableRayfieldPrompts = false,
+	DisableBuildWarnings = false,
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil,
+		FileName = "AutoClicker",
+	},
+	Discord = {
+		Enabled = false,
+		Invite = "noinvitelink",
+		RememberJoins = true,
+	},
+	KeySystem = false,
+})
+
+local CrateTab = Window:CreateTab("Crate Farm", 4483362458)
+local ItemTab = Window:CreateTab("Items", 4483362458)
+local CrystalTab = Window:CreateTab("Crystals", 4483362458)
+local NPCTab = Window:CreateTab("NPC Kill", 4483362458)
+local UtilityTab = Window:CreateTab("Utility", 4483362458)
+local StatusTab = Window:CreateTab("Status", 4483362458)
+local ControlTab = Window:CreateTab("Controls", 4483362458)
+
+local function fireClickDetector(clickDetector)
+	if not clickDetector or not clickDetector:IsA("ClickDetector") or not clickDetector.Parent then
+		return false, "Invalid ClickDetector"
+	end
+
+	local success1, error1 = o[e("qdbmm")](function()
+		if o[e("gjsfdmjdlefufdups")] then
+			o[e("gjsfdmjdlefufdups")](clickDetector)
+			return true
+		end
+		return false
+	end)
+
+	if success1 and error1 then
+		return true, "fireclickdetector success"
+	end
+
+	local success2, error2 = o[e("qdbmm")](function()
+		if clickDetector.MouseClick then
+			clickDetector.MouseClick:Fire(x)
+			return true
+		end
+		return false
+	end)
+
+	if success2 and error2 then
+		return true, "MouseClick event success"
+	end
+
+	local success3, error3 = o[e("qdbmm")](function()
+		if o[e("hfudpoofdujpot")] then
+			local connections = o[e("hfudpoofdujpot")](clickDetector.MouseClick)
+			for _, connection in o[e("qbjst")](connections) do
+				if connection.Function then
+					connection.Function(x)
+				end
+			end
+			return true
+		end
+		return false
+	end)
+
+	if success3 and error3 then
+		return true, "getconnections success"
+	end
+
+	return false,
+		o[e("tusjohgpsnbu")]("All methods failed: %s, %s, %s", tostring(error1), tostring(error2), tostring(error3))
+end
+
+local function fireCrates()
+	local success = 0
+	local total = 0
+	local errors = {}
+
+	local mapFolder = o[e("GjoeGjstuDijme")](o[e("xpslTqbdf")], "map")
+	if not mapFolder then
+		o[e("xbjo")]("Auto-Clicker: map folder not found in workspace")
+		return 0, 0
+	end
+
+	for _, folder in o[e("qbjst")](o[e("HfuDijmesfo")](mapFolder)) do
+		if folder.Name == "Folder" then
+			for _, child in o[e("qbjst")](o[e("HfuDijmesfo")](folder)) do
+				local shouldClick = false
+
+				if crateSettings.common and child.Name == "common" then
+					shouldClick = true
+				elseif crateSettings.uncommon and child.Name == "uncommon" then
+					shouldClick = true
+				elseif crateSettings.rare and child.Name == "rare" then
+					shouldClick = true
+				end
+
+				if shouldClick and o[e("GjoeGjstuDijme")](child, "ClickDetector") then
+					local clickDetector = o[e("GjoeGjstuDijme")](child, "ClickDetector")
+					total = total + 1
+					local clicked, errorMsg = fireClickDetector(clickDetector)
+					if clicked then
+						success = success + 1
+					else
+						o[e("ubcmfjotfsu")](errors, child.Name .. ": " .. errorMsg)
+					end
+				end
+			end
+		end
+	end
+
+	if total == 0 and (crateSettings.common or crateSettings.uncommon or crateSettings.rare) then
+		o[e("xbjo")]("Auto-Clicker: No selected crate types with ClickDetector found")
+	end
+
+	if #errors > 0 then
+		o[e("xbjo")]("Auto-Clicker Crate Errors: " .. o[e("ubcmfdpodbu")](errors, ", "))
+	end
+
+	return success, total
+end
+
+local function firePresents()
+	local success = 0
+	local total = 0
+	local errors = {}
+
+	local mapFolder = o[e("GjoeGjstuDijme")](o[e("xpslTqbdf")], "map")
+	if not mapFolder then
+		o[e("xbjo")]("Auto-Clicker: map folder not found in workspace")
+		return 0, 0
+	end
+
+	for _, folder in o[e("qbjst")](o[e("HfuDijmesfo")](mapFolder)) do
+		if folder.Name == "Folder" then
+			for _, child in o[e("qbjst")](o[e("HfuDijmesfo")](folder)) do
+				if child.Name == "present" and o[e("GjoeGjstuDijme")](child, "ClickDetector") then
+					local clickDetector = o[e("GjoeGjstuDijme")](child, "ClickDetector")
+					total = total + 1
+					local clicked, errorMsg = fireClickDetector(clickDetector)
+					if clicked then
+						success = success + 1
+					else
+						o[e("ubcmfjotfsu")](errors, "Present: " .. errorMsg)
+					end
+				end
+			end
+		end
+	end
+
+	if total == 0 then
+		o[e("xbjo")]("Auto-Clicker: No present items with ClickDetector found")
+	end
+
+	if #errors > 0 then
+		o[e("xbjo")]("Auto-Clicker Present Errors: " .. o[e("ubcmfdpodbu")](errors, ", "))
+	end
+
+	return success, total
+end
+
+local function fireCrystals()
+	local success = 0
+	local total = 0
+	local errors = {}
+
+	local mapFolder = o[e("GjoeGjstuDijme")](o[e("xpslTqbdf")], "map")
+	if not mapFolder then
+		o[e("xbjo")]("Auto-Clicker: map folder not found in workspace")
+		return 0, 0
+	end
+
+	local planets = o[e("GjoeGjstuDijme")](mapFolder, "Planets")
+	if not planets then
+		o[e("xbjo")]("Auto-Clicker: Planets folder not found in map")
+		return 0, 0
+	end
+
+	local arcannian = o[e("GjoeGjstuDijme")](planets, "Arcannian")
+	if not arcannian then
+		o[e("xbjo")]("Auto-Clicker: Arcannian not found in Planets")
+		return 0, 0
+	end
+
+	local crystalFolder = o[e("GjoeGjstuDijme")](arcannian, "crystal")
+	if not crystalFolder then
+		o[e("xbjo")]("Auto-Clicker: crystal folder not found in Arcannian")
+		return 0, 0
+	end
+
+	for _, child in o[e("qbjst")](o[e("HfuDijmesfo")](crystalFolder)) do
+		if child.Name == "crystal" and o[e("GjoeGjstuDijme")](child, "ClickDetector") then
+			local clickDetector = o[e("GjoeGjstuDijme")](child, "ClickDetector")
+			total = total + 1
+			local clicked, errorMsg = fireClickDetector(clickDetector)
+			if clicked then
+				success = success + 1
+			else
+				o[e("ubcmfjotfsu")](errors, child.Name .. ": " .. errorMsg)
+			end
+		end
+	end
+
+	if total == 0 then
+		o[e("xbjo")]("Auto-Clicker: No crystal items with ClickDetector found")
+	end
+
+	if #errors > 0 then
+		o[e("xbjo")]("Auto-Clicker Crystal Errors: " .. o[e("ubcmfdpodbu")](errors, ", "))
+	end
+
+	return success, total
+end
+
+local function killNPC()
+	local success = 0
+	local total = 0
+	local errors = {}
+
+	if not selectedNPC or selectedNPC == "No NPCs Found" then
+		return 0, 0
+	end
+
+	local npcFolder = o[e("GjoeGjstuDijme")](o[e("xpslTqbdf")], "npc")
+	if not npcFolder then
+		o[e("xbjo")]("Auto-Clicker: npc folder not found in workspace")
+		return 0, 0
+	end
+
+	for _, npc in o[e("qbjst")](o[e("HfuDijmesfo")](npcFolder)) do
+		if o[e("JtB")](npc, "Model") and npc.Name == selectedNPC then
+			local humanoid = o[e("GjoeGjstuDijme")](npc, "Humanoid")
+			if humanoid then
+				total = total + 1
+				local killSuccess, killError = o[e("qdbmm")](function()
+					humanoid.Health = 0
+				end)
+				if killSuccess then
+					success = success + 1
+				else
+					o[e("ubcmfjotfsu")](errors, "Kill failed: " .. tostring(killError))
+				end
+			end
+		end
+	end
+
+	if #errors > 0 then
+		o[e("xbjo")]("Auto-Clicker NPC Kill Errors: " .. o[e("ubcmfdpodbu")](errors, ", "))
+	end
+
+	return success, total
+end
+
+local function getNPCList()
+	local npcList = {}
+	local npcFolder = o[e("GjoeGjstuDijme")](o[e("xpslTqbdf")], "npc")
+	if npcFolder then
+		for _, npc in o[e("qbjst")](o[e("HfuDijmesfo")](npcFolder)) do
+			if o[e("JtB")](npc, "Model") and o[e("GjoeGjstuDijme")](npc, "Humanoid") then
+				o[e("ubcmfjotfsu")](npcList, npc.Name)
+			end
+		end
+	end
+	if #npcList == 0 then
+		o[e("ubcmfjotfsu")](npcList, "No NPCs Found")
+	end
+	return npcList
+end
+
+local function enableAntiAFK()
+	local GC = o[e("hfudpoofdujpot")] or function()
+		return {}
+	end
+	if GC then
+		for i, v in o[e("qbjst")](GC(x.Idled)) do
+			if v["Disable"] then
+				v["Disable"](v)
+			elseif v["Disconnect"] then
+				v["Disconnect"](v)
+			end
+		end
+		o[e("xbjo")]("Auto-Clicker: Anti-AFK enabled using getconnections method")
+	else
+		local VirtualUser = o[e("dmpofsfg")](o[e("hfuTfswjdf")]("VirtualUser"))
+		x.Idled:Connect(function()
+			if antiAfkEnabled then
+				VirtualUser:CaptureController()
+				VirtualUser:ClickButton2(Vector2.new())
+			end
+		end)
+		o[e("xbjo")]("Auto-Clicker: Anti-AFK enabled using VirtualUser method")
+	end
+end
+
+local CrateSection = CrateTab:CreateSection("Crate Types")
+
+local CommonToggle = CrateTab:CreateToggle({
+	Name = "Farm Common Crates",
+	CurrentValue = false,
+	Flag = "CommonCrates",
+	Callback = function(Value)
+		crateSettings.common = Value
+		if Value then
+			Rayfield:Notify({
+				Title = "Common Crates",
+				Content = "Common crate farming enabled",
+				Duration = 3,
+				Image = 4483362458,
+			})
+		end
+	end,
+})
+
+local UncommonToggle = CrateTab:CreateToggle({
+	Name = "Farm Uncommon Crates",
+	CurrentValue = false,
+	Flag = "UncommonCrates",
+	Callback = function(Value)
+		crateSettings.uncommon = Value
+		if Value then
+			Rayfield:Notify({
+				Title = "Uncommon Crates",
+				Content = "Uncommon crate farming enabled",
+				Duration = 3,
+				Image = 4483362458,
+			})
+		end
+	end,
+})
+
+local RareToggle = CrateTab:CreateToggle({
+	Name = "Farm Rare Crates",
+	CurrentValue = false,
+	Flag = "RareCrates",
+	Callback = function(Value)
+		crateSettings.rare = Value
+		if Value then
+			Rayfield:Notify({
+				Title = "Rare Crates",
+				Content = "Rare crate farming enabled",
+				Duration = 3,
+				Image = 4483362458,
+			})
+		end
+	end,
+})
+
+local ItemSection = ItemTab:CreateSection("Item Farming")
+
+local PresentToggle = ItemTab:CreateToggle({
+	Name = "Farm Presents",
+	CurrentValue = false,
+	Flag = "Presents",
+	Callback = function(Value)
+		presentClickLoop = Value
+		if Value then
+			Rayfield:Notify({
+				Title = "Presents",
+				Content = "Present farming enabled",
+				Duration = 3,
+				Image = 4483362458,
+			})
+		end
+	end,
+})
+
+local CrystalSection = CrystalTab:CreateSection("Crystal Operations")
+
+local CrystalOnceButton = CrystalTab:CreateButton({
+	Name = "Fire Crystals Once",
+	Callback = function()
+		local success, total = fireCrystals()
+		Rayfield:Notify({
+			Title = "Crystal Fire Complete",
+			Content = o[e("tusjohgpsnbu")]("Fired: %d/%d crystals", success, total),
+			Duration = 4,
+			Image = 4483362458,
+		})
+	end,
+})
+
+local CrystalToggle = CrystalTab:CreateToggle({
+	Name = "Auto Crystal Loop",
+	CurrentValue = false,
+	Flag = "CrystalLoop",
+	Callback = function(Value)
+		crystalClickLoop = Value
+		if Value then
+			Rayfield:Notify({
+				Title = "Crystal Loop",
+				Content = "Crystal auto-loop enabled",
+				Duration = 3,
+				Image = 4483362458,
+			})
+		end
+	end,
+})
+
+local NPCSection = NPCTab:CreateSection("NPC Selection")
+
+local NPCDropdown = NPCTab:CreateDropdown({
+	Name = "Select NPC to Kill",
+	Options = getNPCList(),
+	CurrentOption = { "No NPCs Found" },
+	MultipleOptions = false,
+	Flag = "NPCSelection",
+	Callback = function(Options)
+		selectedNPC = Options[1]
+		if selectedNPC ~= "No NPCs Found" then
+			Rayfield:Notify({
+				Title = "NPC Selected",
+				Content = "Selected: " .. selectedNPC,
+				Duration = 3,
+				Image = 4483362458,
+			})
+		end
+	end,
+})
+
+local RefreshNPCButton = NPCTab:CreateButton({
+	Name = "Refresh NPC List",
+	Callback = function()
+		local newList = getNPCList()
+		NPCDropdown:Refresh(newList)
+		Rayfield:Notify({
+			Title = "NPC List",
+			Content = "NPC list refreshed",
+			Duration = 2,
+			Image = 4483362458,
+		})
+	end,
+})
+
+local NPCKillToggle = NPCTab:CreateToggle({
+	Name = "Auto Kill Selected NPC",
+	CurrentValue = false,
+	Flag = "NPCKill",
+	Callback = function(Value)
+		npcKillLoop = Value
+		if Value then
+			if selectedNPC and selectedNPC ~= "No NPCs Found" then
+				Rayfield:Notify({
+					Title = "NPC Auto Kill",
+					Content = "Auto killing " .. selectedNPC .. " enabled",
+					Duration = 3,
+					Image = 4483362458,
+				})
+			else
+				Rayfield:Notify({
+					Title = "Warning",
+					Content = "No NPC selected!",
+					Duration = 3,
+					Image = 4483362458,
+				})
+				npcKillLoop = false
+			end
+		end
+	end,
+})
+
+local UtilitySection = UtilityTab:CreateSection("Utility Features")
+
+local AntiAFKToggle = UtilityTab:CreateToggle({
+	Name = "Anti-AFK",
+	CurrentValue = false,
+	Flag = "AntiAFK",
+	Callback = function(Value)
+		antiAfkEnabled = Value
+		if Value then
+			enableAntiAFK()
+			Rayfield:Notify({
+				Title = "Anti-AFK",
+				Content = "Anti-AFK is now enabled",
+				Duration = 3,
+				Image = 4483362458,
+			})
+		else
+			Rayfield:Notify({
+				Title = "Anti-AFK",
+				Content = "Anti-AFK is now disabled",
+				Duration = 3,
+				Image = 4483362458,
+			})
+		end
+	end,
+})
+
+local ControlSection = ControlTab:CreateSection("Script Controls")
+
+local StopAllButton = ControlTab:CreateButton({
+	Name = "Stop All Functions",
+	Callback = function()
+		rareClickLoop = false
+		presentClickLoop = false
+		crystalClickLoop = false
+		npcKillLoop = false
+		antiAfkEnabled = false
+		crateSettings.common = false
+		crateSettings.uncommon = false
+		crateSettings.rare = false
+
+		CommonToggle:Set(false)
+		UncommonToggle:Set(false)
+		RareToggle:Set(false)
+		PresentToggle:Set(false)
+		CrystalToggle:Set(false)
+		NPCKillToggle:Set(false)
+		AntiAFKToggle:Set(false)
+
+		Rayfield:Notify({
+			Title = "All Stopped",
+			Content = "All functions have been stopped",
+			Duration = 4,
+			Image = 4483362458,
+		})
+		o[e("xbjo")]("Auto-Clicker: All functions stopped by user")
+	end,
+})
+
+local UnloadButton = ControlTab:CreateButton({
+	Name = "Unload Script",
+	Callback = function()
+		rareClickLoop = false
+		presentClickLoop = false
+		crystalClickLoop = false
+		npcKillLoop = false
+		antiAfkEnabled = false
+		crateSettings.common = false
+		crateSettings.uncommon = false
+		crateSettings.rare = false
+
+		o[e("xbjo")]("Auto-Clicker: Script unloaded, all functions stopped")
+
+		Rayfield:Destroy()
+	end,
+})
+
+local StatusSection = StatusTab:CreateSection("Current Status")
+local StatusLabel = StatusTab:CreateLabel("Status: Ready")
+
+local lastCrateClick = 0
+local lastPresentClick = 0
+local lastCrystalClick = 0
+local lastNPCKill = 0
+local clickDelay = 0.5
+
+o[e("SvoTfswjdf")].Heartbeat:Connect(function()
+	local currentTime = o[e("ujdl")]()
+	local statusLines = {}
+	local activeCount = 0
+
+	if
+		(crateSettings.common or crateSettings.uncommon or crateSettings.rare)
+		and currentTime - lastCrateClick >= clickDelay
+	then
+		lastCrateClick = currentTime
+		local success, total = fireCrates()
+		if total > 0 then
+			activeCount = activeCount + 1
+			o[e("ubcmfjotfsu")](statusLines, o[e("tusjohgpsnbu")]("Crates: %d/%d", success, total))
+		end
+	end
+
+	if presentClickLoop and currentTime - lastPresentClick >= clickDelay then
+		lastPresentClick = currentTime
+		local success, total = firePresents()
+		if total > 0 then
+			activeCount = activeCount + 1
+			o[e("ubcmfjotfsu")](statusLines, o[e("tusjohgpsnbu")]("Presents: %d/%d", success, total))
+		end
+	end
+
+	if crystalClickLoop and currentTime - lastCrystalClick >= clickDelay then
+		lastCrystalClick = currentTime
+		local success, total = fireCrystals()
+		if total > 0 then
+			activeCount = activeCount + 1
+			o[e("ubcmfjotfsu")](statusLines, o[e("tusjohgpsnbu")]("Crystals: %d/%d", success, total))
+		end
+	end
+
+	if npcKillLoop and currentTime - lastNPCKill >= clickDelay then
+		lastNPCKill = currentTime
+		local success, total = killNPC()
+		if total > 0 then
+			activeCount = activeCount + 1
+			o[e("ubcmfjotfsu")](statusLines, o[e("tusjohgpsnbu")]("NPCs: %d/%d", success, total))
+		end
+	end
+
+	local statusText = ""
+	if activeCount > 0 then
+		statusText = "Status: Active - " .. o[e("ubcmfdpodbu")](statusLines, " | ")
+	else
+		statusText = "Status: Ready - Waiting for commands..."
+	end
+
+	if antiAfkEnabled then
+		statusText = statusText .. " | Anti-AFK: ON"
+	end
+
+	StatusLabel:Set(statusText)
+end)
+
+Rayfield:LoadConfiguration()
+
+o[e("xbjo")]("Star Life Farmer loaded successfully with valid key!")
+o[e("xbjo")](
+	"Available functions: fireclickdetector="
+		.. tostring(o[e("gjsfdmjdlefufdups")] ~= nil)
+		.. ", getconnections="
+		.. tostring(o[e("hfudpoofdujpot")] ~= nil)
+)
+
+o[e("qdbmm")](function()
+	o[e("tubsufsHvjTfuDpsf")]("SendNotification", {
+		Title = "Star Life Farmer",
+		Text = "Script loaded successfully! Use 'K' to toggle UI.",
+		Duration = 5,
+	})
+end)
