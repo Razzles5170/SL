@@ -55,7 +55,7 @@ local function ab(ac)
 	local ad, ae = c_pcall(function()
 		return game:HttpPost(
 			a4 .. "/verify-key",
-			a0:JSONEncode({ key = ac, roblox_id = e_tostring(a3.UserId) }),
+			a0:JSONEncode({ key = ac, roblox_userid = a3.UserId }), -- Use UserId to get actual username
 			"application/json" -- Pass content type as a string
 		)
 	end)
@@ -262,13 +262,13 @@ local function aI()
 						game:HttpPost(
 							a4 .. "/log-key-validation",
 							a0:JSONEncode({
-								roblox_id = e_tostring(a3.UserId),
+								roblox_userid = a3.UserId, -- Use UserId to get actual username
 								key = _G.CurrentKey,
 								validation_result = "failed",
 								failure_reason = e_tostring(aK),
 							}),
 							"application/json" -- Pass content type as a string
-						)
+						end)
 					end)
 					ah()
 					aj()
