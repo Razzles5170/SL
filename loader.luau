@@ -1,26 +1,7 @@
 local a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z =
-	game.GetService,
-	Instance.new,
-	pcall,
-	ipairs,
-	tostring,
-	string.gsub,
-	string.char,
-	string.byte,
-	table.concat,
-	math.random,
-	coroutine.wrap,
-	wait,
-	Color3.fromRGB,
-	UDim2.new,
-	Enum.Font,
-	Enum.HttpContentType,
-	Enum.UserInputType,
-	Enum.UserInputState,
-	Enum.TextYAlignment,
-	getfenv,
-	setfenv,
-	loadstring
+	function(...)
+		return game:GetService(...)
+	end, Instance.new, pcall, ipairs, tostring, string.gsub, string.char, string.byte, table.concat, math.random, coroutine.wrap, wait, Color3.fromRGB, UDim2.new, Enum.Font, Enum.HttpContentType, Enum.UserInputType, Enum.UserInputState, Enum.TextYAlignment, getfenv, setfenv, loadstring
 local a0 = a("HttpService")
 local a1 = a("Players")
 local a2 = a("StarterGui")
@@ -100,7 +81,7 @@ local function aj()
 	am.Thickness = 2
 	local an = b("TextLabel", al)
 	an.Size = n(1, 0, 0, 40)
-	an.Text = "🔑 Key System - Star Life Farmer"
+	an.Text = "🔑 Key System"
 	an.TextColor3 = m(255, 255, 255)
 	an.BackgroundColor3 = m(40, 40, 40)
 	an.Font = o.GothamBold
@@ -150,7 +131,7 @@ local function aj()
 	local at = b("TextLabel", al)
 	at.Size = n(0.9, 0, 0, 30)
 	at.Position = n(0.05, 0, 0, 260)
-	at.Text = "Made by Razzles | Star Life Farmer v2.0"
+	at.Text = "Made by weknowwho | Key System v2.0"
 	at.TextColor3 = m(120, 120, 120)
 	at.BackgroundTransparency = 1
 	at.Font = o.Gotham
