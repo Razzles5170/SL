@@ -1,296 +1,554 @@
-local a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v = -- Fixed order
-	function(...)
-		return game:GetService(...)
-	end, Instance.new, pcall, ipairs, tostring, string.gsub, string.char, string.byte, table.concat, math.random, coroutine.wrap, wait, Color3.fromRGB, UDim2.new, Enum.Font.GothamBold, Enum.HttpContentType.ApplicationJson, Enum.UserInputType.MouseButton1, Enum.UserInputState.End, Enum.TextYAlignment.Top, getfenv, setfenv, loadstring
-
--- Re-map the local variables correctly to avoid calling Enum values.
-local a_GetService = a
-local b_Instance_new = b
-local c_pcall = c
-local d_ipairs = d
-local e_tostring = e
-local f_gsub = f
-local g_char = g
-local h_byte = h
-local i_concat = i
-local j_random = j
-local k_wrap = k
-local l_wait = l
-local m_Color3_fromRGB = m
-local n_UDim2_new = n
-local o_Font = o
-local p_HttpContentType = p
-local q_UserInputType = Enum.UserInputType
-local r_UserInputState = Enum.UserInputState
-local s_TextYAlignment = s
-local t_getfenv = t
-local u_setfenv = u
-local v_loadstring = v
-
-local a0 = a_GetService("HttpService")
-local a1 = a_GetService("Players")
-local a2 = a_GetService("StarterGui")
-local a3 = a1.LocalPlayer
-local a4 = "https://key.razzles.xyz"
-_G.CurrentKey = nil
-_G.KeyVerified = false
-_G.ScriptLoaded = false
-_G.LoaderAuthenticated = true
-local a5 = e_tostring(j_random(1000000, 9999999)) -- Use correct functions
-_G.SecurityToken = a5
-
-local function a6()
-	return _G.SecurityToken == a5 and _G.LoaderAuthenticated == true
-end
-
-local function a7(a8, a9, aa)
-	c_pcall(function()
-		a2:SetCore("SendNotification", { Title = a8, Text = a9, Duration = aa or 5 })
-	end)
-end
-
-local function ab(ac)
-	if not a6() then
-		return false, "Security check failed"
+local l_1_0 = { 72, 116, 116, 112, 83, 101, 114, 118, 105, 99, 101 }
+local l_2_0 = { 80, 108, 97, 121, 101, 114, 115 }
+local l_3_0 = {
+	104,
+	116,
+	116,
+	112,
+	115,
+	58,
+	47,
+	47,
+	115,
+	116,
+	97,
+	114,
+	108,
+	105,
+	102,
+	101,
+	45,
+	107,
+	101,
+	121,
+	45,
+	115,
+	121,
+	115,
+	116,
+	101,
+	109,
+	46,
+	111,
+	110,
+	114,
+	101,
+	110,
+	100,
+	101,
+	114,
+	46,
+	99,
+	111,
+	109,
+	47,
+	97,
+	112,
+	105,
+	47,
+	107,
+	101,
+	121,
+	115,
+	47,
+}
+local l_4_0 = {
+	104,
+	116,
+	116,
+	112,
+	115,
+	58,
+	47,
+	47,
+	114,
+	97,
+	119,
+	46,
+	103,
+	105,
+	116,
+	104,
+	117,
+	98,
+	117,
+	115,
+	101,
+	114,
+	99,
+	111,
+	110,
+	116,
+	101,
+	110,
+	116,
+	46,
+	99,
+	111,
+	109,
+	47,
+	115,
+	116,
+	97,
+	114,
+	108,
+	105,
+	102,
+	101,
+	120,
+	47,
+	102,
+	105,
+	118,
+	101,
+	109,
+	47,
+	109,
+	97,
+	105,
+	110,
+	47,
+	102,
+	97,
+	114,
+	109,
+	101,
+	114,
+	115,
+	99,
+	114,
+	105,
+	112,
+	116,
+	46,
+	108,
+	117,
+	97,
+	117,
+}
+local l_5_0 = {
+	83,
+	116,
+	97,
+	114,
+	32,
+	76,
+	105,
+	102,
+	101,
+	32,
+	70,
+	97,
+	114,
+	109,
+	101,
+	114,
+	58,
+	32,
+	80,
+	108,
+	97,
+	121,
+	101,
+	114,
+	32,
+	110,
+	111,
+	116,
+	32,
+	102,
+	111,
+	117,
+	110,
+	100,
+	46,
+}
+local l_6_0 = { 115, 116, 97, 114, 108, 105, 102, 101, 95, 107, 101, 121 }
+local l_7_0 = {
+	83,
+	116,
+	97,
+	114,
+	32,
+	76,
+	105,
+	102,
+	101,
+	32,
+	70,
+	97,
+	114,
+	109,
+	101,
+	114,
+	58,
+	32,
+	75,
+	101,
+	121,
+	32,
+	110,
+	111,
+	116,
+	32,
+	102,
+	111,
+	117,
+	110,
+	100,
+	46,
+	32,
+	80,
+	108,
+	101,
+	97,
+	115,
+	101,
+	32,
+	115,
+	101,
+	116,
+	32,
+	39,
+	115,
+	116,
+	97,
+	114,
+	108,
+	105,
+	102,
+	101,
+	95,
+	107,
+	101,
+	121,
+	39,
+	32,
+	105,
+	110,
+	32,
+	121,
+	111,
+	117,
+	114,
+	32,
+	101,
+	110,
+	118,
+	105,
+	114,
+	111,
+	110,
+	109,
+	101,
+	110,
+	116,
+	46,
+}
+local l_8_0 = {
+	83,
+	116,
+	97,
+	114,
+	32,
+	76,
+	105,
+	102,
+	101,
+	32,
+	70,
+	97,
+	114,
+	109,
+	101,
+	114,
+	58,
+	32,
+	70,
+	97,
+	105,
+	108,
+	101,
+	100,
+	32,
+	116,
+	111,
+	32,
+	99,
+	111,
+	110,
+	110,
+	101,
+	99,
+	116,
+	32,
+	116,
+	111,
+	32,
+	116,
+	104,
+	101,
+	32,
+	107,
+	101,
+	121,
+	32,
+	115,
+	121,
+	115,
+	116,
+	101,
+	109,
+	32,
+	115,
+	101,
+	114,
+	118,
+	101,
+	114,
+	58,
+	32,
+}
+local l_9_0 = {
+	83,
+	116,
+	97,
+	114,
+	32,
+	76,
+	105,
+	102,
+	101,
+	32,
+	70,
+	97,
+	114,
+	109,
+	101,
+	114,
+	58,
+	32,
+	70,
+	97,
+	105,
+	108,
+	101,
+	100,
+	32,
+	116,
+	111,
+	32,
+	100,
+	101,
+	99,
+	111,
+	100,
+	101,
+	32,
+	115,
+	101,
+	114,
+	118,
+	101,
+	114,
+	32,
+	114,
+	101,
+	115,
+	112,
+	111,
+	110,
+	115,
+	101,
+	46,
+}
+local l_10_0 = { 118, 97, 108, 105, 100 }
+local l_11_0 = {
+	83,
+	116,
+	97,
+	114,
+	32,
+	76,
+	105,
+	102,
+	101,
+	32,
+	70,
+	97,
+	114,
+	109,
+	101,
+	114,
+	58,
+	32,
+	75,
+	101,
+	121,
+	32,
+	105,
+	115,
+	32,
+	118,
+	97,
+	108,
+	105,
+	100,
+	46,
+	32,
+	76,
+	111,
+	97,
+	100,
+	105,
+	110,
+	103,
+	32,
+	115,
+	99,
+	114,
+	105,
+	112,
+	116,
+	46,
+	46,
+	46,
+}
+local l_12_0 = {
+	83,
+	116,
+	97,
+	114,
+	32,
+	76,
+	105,
+	102,
+	101,
+	32,
+	70,
+	97,
+	114,
+	109,
+	101,
+	114,
+	58,
+	32,
+	70,
+	97,
+	105,
+	108,
+	101,
+	100,
+	32,
+	116,
+	111,
+	32,
+	108,
+	111,
+	97,
+	100,
+	32,
+	116,
+	104,
+	101,
+	32,
+	102,
+	97,
+	114,
+	109,
+	101,
+	114,
+	32,
+	115,
+	99,
+	114,
+	105,
+	112,
+	116,
+	58,
+	32,
+}
+local l_13_0 = {
+	83,
+	116,
+	97,
+	114,
+	32,
+	76,
+	105,
+	102,
+	101,
+	32,
+	70,
+	97,
+	114,
+	109,
+	101,
+	114,
+	58,
+	32,
+	73,
+	110,
+	118,
+	97,
+	108,
+	105,
+	100,
+	32,
+	107,
+	101,
+	121,
+	46,
+}
+local function l_14_0(l_15_0)
+	local l_16_0 = ""
+	for l_17_0 = 1, #l_15_0 do
+		l_16_0 = l_16_0 .. string.char(l_15_0[l_17_0])
 	end
-	local ad, ae = c_pcall(function()
-		return game:HttpPost(
-			a4 .. "/verify-key",
-			a0:JSONEncode({ key = ac, roblox_userid = a3.UserId }),
-			"application/json"
-		)
+	return l_16_0
+end
+local l_18_0 = game:GetService(l_14_0(l_1_0))
+local l_19_0 = game:GetService(l_14_0(l_2_0))
+local l_20_0 = l_14_0(l_3_0)
+local l_21_0 = l_14_0(l_4_0)
+local function l_22_0()
+	local l_23_0 = l_19_0.LocalPlayer
+	if not l_23_0 then
+		warn(l_14_0(l_5_0))
+		return
+	end
+	local l_24_0 = getgenv()[l_14_0(l_6_0)]
+	if not l_24_0 then
+		warn(l_14_0(l_7_0))
+		return
+	end
+	local l_25_0 = l_20_0 .. l_24_0
+	local l_26_0, l_27_0 = pcall(function()
+		return l_18_0:GetAsync(l_25_0)
 	end)
-	if ad then
-		local af, ag = c_pcall(function()
-			return a0:JSONDecode(ae)
+	if not l_26_0 then
+		warn(l_14_0(l_8_0) .. tostring(l_27_0))
+		return
+	end
+	local l_28_0
+	local l_29_0, l_30_0 = pcall(function()
+		return l_18_0:JSONDecode(l_27_0)
+	end)
+	if not l_29_0 then
+		warn(l_14_0(l_9_0))
+		return
+	end
+	l_28_0 = l_30_0
+	if l_28_0 and l_28_0[l_14_0(l_10_0)] then
+		print(l_14_0(l_11_0))
+		local l_31_0, l_32_0 = pcall(function()
+			return loadstring(game:HttpGet(l_21_0))()
 		end)
-		if af and ag then
-			return ag.valid, ag.reason
-		else
-			return false, "Invalid server response"
+		if not l_31_0 then
+			warn(l_14_0(l_12_0) .. tostring(l_32_0))
 		end
 	else
-		return false, "Connection failed: " .. e_tostring(ae)
+		warn(l_14_0(l_13_0))
 	end
 end
-
-local function ah()
-	if not a6() then
-		return
-	end
-	_G.KeyVerified = false
-	_G.ScriptLoaded = false
-	_G.CurrentKey = nil
-	_G.LoaderAuthenticated = false
-	if _G.StarLifeFarmerUnload then
-		c_pcall(_G.StarLifeFarmerUnload)
-	end
-	local ai = a3.PlayerGui:FindFirstChild("KeySystemUI")
-	if ai then
-		ai:Destroy()
-	end
-	a7("Key System", "Script unloaded", 5)
-	warn("Key System: Unloaded")
-end
-
-local function aj()
-	if a3.PlayerGui:FindFirstChild("KeySystemUI") then
-		return
-	end
-	local ak = b_Instance_new("ScreenGui", a3.PlayerGui)
-	ak.Name = "KeySystemUI"
-	ak.ResetOnSpawn = false
-	local al = b_Instance_new("Frame", ak)
-	al.Size = n_UDim2_new(0, 450, 0, 300)
-	al.Position = n_UDim2_new(0.5, -225, 0.5, -150)
-	al.BackgroundColor3 = m_Color3_fromRGB(25, 25, 25)
-	al.BorderSizePixel = 0
-	b_Instance_new("UICorner", al).CornerRadius = UDim.new(0, 8)
-	local am = b_Instance_new("UIStroke", al)
-	am.Color = m_Color3_fromRGB(60, 60, 60)
-	am.Thickness = 2
-	local an = b_Instance_new("TextLabel", al)
-	an.Size = n_UDim2_new(1, 0, 0, 40)
-	an.Text = "🔑 Key System"
-	an.TextColor3 = m_Color3_fromRGB(255, 255, 255)
-	an.BackgroundColor3 = m_Color3_fromRGB(40, 40, 40)
-	an.Font = o_Font
-	an.TextSize = 16
-	b_Instance_new("UICorner", an).CornerRadius = UDim.new(0, 8)
-	local ao = b_Instance_new("TextBox", al)
-	ao.Size = n_UDim2_new(0.85, 0, 0, 45)
-	ao.Position = n_UDim2_new(0.075, 0, 0, 60)
-	ao.Text = ""
-	ao.PlaceholderText = "Enter your key here..."
-	ao.TextColor3 = m_Color3_fromRGB(255, 255, 255)
-	ao.BackgroundColor3 = m_Color3_fromRGB(35, 35, 35)
-	ao.Font = Enum.Font.Gotham
-	ao.TextSize = 14
-	ao.ClearTextOnFocus = true
-	b_Instance_new("UICorner", ao).CornerRadius = UDim.new(0, 6)
-	local ap = b_Instance_new("UIStroke", ao)
-	ap.Color = m_Color3_fromRGB(80, 80, 80)
-	ap.Thickness = 1
-	local aq = b_Instance_new("TextButton", al)
-	aq.Size = n_UDim2_new(0.4, 0, 0, 45)
-	aq.Position = n_UDim2_new(0.075, 0, 0, 125)
-	aq.Text = "✓ Verify Key"
-	aq.BackgroundColor3 = m_Color3_fromRGB(0, 120, 215)
-	aq.TextColor3 = m_Color3_fromRGB(255, 255, 255)
-	aq.Font = o_Font
-	aq.TextSize = 14
-	b_Instance_new("UICorner", aq).CornerRadius = UDim.new(0, 6)
-	local ar = b_Instance_new("TextButton", al)
-	ar.Size = n_UDim2_new(0.4, 0, 0, 45)
-	ar.Position = n_UDim2_new(0.525, 0, 0, 125)
-	ar.Text = "🔗 Get Key"
-	ar.BackgroundColor3 = m_Color3_fromRGB(0, 150, 85)
-	ar.TextColor3 = m_Color3_fromRGB(255, 255, 255)
-	ar.Font = o_Font
-	ar.TextSize = 14
-	b_Instance_new("UICorner", ar).CornerRadius = UDim.new(0, 6)
-	local as = b_Instance_new("TextLabel", al)
-	as.Size = n_UDim2_new(0.9, 0, 0, 60)
-	as.Position = n_UDim2_new(0.05, 0, 0, 190)
-	as.Text = "Welcome! Please enter your key or get a new one."
-	as.TextColor3 = m_Color3_fromRGB(200, 200, 200)
-	as.BackgroundTransparency = 1
-	as.Font = Enum.Font.Gotham
-	as.TextSize = 12
-	as.TextWrapped = true
-	as.TextYAlignment = s_TextYAlignment
-	local at = b_Instance_new("TextLabel", al)
-	at.Size = n_UDim2_new(0.9, 0, 0, 30)
-	at.Position = n_UDim2_new(0.05, 0, 0, 260)
-	at.Text = "Made by thosewhoknow  | Farmer v2.0"
-	at.TextColor3 = m_Color3_fromRGB(120, 120, 120)
-	at.BackgroundTransparency = 1
-	at.Font = Enum.Font.Gotham
-	at.TextSize = 10
-	aq.MouseButton1Click:Connect(function()
-		if not a6() then
-			return
-		end
-		local au = f_gsub(ao.Text, "%s+", "")
-		if au == "" then
-			as.Text = "❌ Please enter a key."
-			as.TextColor3 = m_Color3_fromRGB(255, 100, 100)
-			return
-		end
-		as.Text = "🔄 Verifying key..."
-		as.TextColor3 = m_Color3_fromRGB(255, 200, 0)
-		aq.Text = "Verifying..."
-		aq.BackgroundColor3 = m_Color3_fromRGB(100, 100, 100)
-		l_wait(0.5)
-		local av, aw = ab(au)
-		if av then
-			_G.CurrentKey = au
-			_G.KeyVerified = true
-			as.Text = "✅ Key verified successfully! Loading script..."
-			as.TextColor3 = m_Color3_fromRGB(100, 255, 100)
-			a7("Key System", "Key verified! Loading Farmer...", 3)
-			l_wait(1)
-			ak:Destroy()
-			local ax, ay = c_pcall(function()
-				v_loadstring(
-					game:HttpGet(
-						"https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/main.luau",
-						true
-					)
-				)()
-				_G.ScriptLoaded = true
-			end)
-			if not ax then
-				as.Text = "❌ Failed to load script: " .. e_tostring(ay)
-				as.TextColor3 = m_Color3_fromRGB(255, 100, 100)
-				a7("Key System", "Failed to load script!", 5)
-			end
-		else
-			as.Text = "❌ " .. e_tostring(aw)
-			as.TextColor3 = m_Color3_fromRGB(255, 100, 100)
-			aq.Text = "✓ Verify Key"
-			aq.BackgroundColor3 = m_Color3_fromRGB(0, 120, 215)
-			a7("Key System", "Key verification failed: " .. e_tostring(aw), 5)
-		end
-	end)
-	ar.MouseButton1Click:Connect(function()
-		if typeof(setclipboard) == "function" then
-			local az = c_pcall(setclipboard, a4)
-			if az then
-				as.Text =
-					"📋 Key link copied to clipboard!\nPaste it in your browser and follow the steps to get your key."
-				as.TextColor3 = m_Color3_fromRGB(100, 255, 100)
-				a7("Key System", "Key link copied to clipboard! Paste in browser to get your key.", 7)
-			else
-				as.Text = "❌ Clipboard not supported. Visit: " .. a4
-				as.TextColor3 = m_Color3_fromRGB(255, 200, 0)
-				a7("Key System", "Visit " .. a4 .. " to get your key", 7)
-			end
-		else
-			as.Text = "❌ Clipboard not available. Visit: " .. a4
-			as.TextColor3 = m_Color3_fromRGB(255, 200, 0)
-			a7("Key System", "Visit " .. a4 .. " to get your key", 7)
-		end
-	end)
-	local aA, aB, aC, aD
-	an.InputBegan:Connect(function(aE)
-		if aE.UserInputType == q_UserInputType.MouseButton1 or aE.UserInputType == q_UserInputType.Touch then
-			aA = true
-			aC = aE.Position
-			aD = al.Position
-			aE.Changed:Connect(function()
-				if aE.UserInputState == r_UserInputState.End then
-					aA = false
-				end
-			end)
-		end
-	end)
-	an.InputChanged:Connect(function(aF)
-		if aF.UserInputType == q_UserInputType.MouseMovement or aF.UserInputType == q_UserInputType.Touch then
-			if aA then
-				local aG = aF.Position - aC
-				local aH = n_UDim2_new(aD.X.Scale, aD.X.Offset + aG.X, aD.Y.Scale, aD.Y.Offset + aG.Y)
-				a_GetService("TweenService"):Create(al, TweenInfo.new(0.25), { Position = aH }):Play()
-			end
-		end
-	end)
-end
-
-local function aI()
-	k_wrap(function()
-		while l_wait(300) do
-			if _G.CurrentKey and _G.KeyVerified and a6() then
-				local aJ, aK = ab(_G.CurrentKey)
-				if not aJ then
-					warn("Key System: Key validation failed - " .. e_tostring(aK))
-					c_pcall(function()
-						game:HttpPost(
-							a4 .. "/log-key-validation",
-							a0:JSONEncode({
-								roblox_userid = a3.UserId,
-								key = _G.CurrentKey,
-								validation_result = "failed",
-								failure_reason = e_tostring(aK),
-							}),
-							"application/json"
-						)
-					end)
-					ah()
-					aj()
-					break
-				end
-			end
-		end
-	end)()
-end
-
-_G.ShowKeyUI = aj
-_G.StarLifeKeySystemUnload = ah
-
-if a6() then
-	aj()
-	aI()
-	a7("Key System", "Key System loaded!", 3)
-else
-	warn("Loader integrity compromised.")
-end
+l_22_0()
