@@ -404,8 +404,23 @@ local function createUI()
 
 		local isValid, reason = verifyKey(enteredKey)
 		if isValid then
+			-- Set all required global variables before loading script
 			getgenv().StarLifeKey.CurrentKey = enteredKey
 			getgenv().StarLifeKey.KeyVerified = true
+			getgenv().StarLifeKey.LoaderAuthenticated = true
+			getgenv().StarLifeKey.ScriptLoaded = false
+			-- Ensure SecurityToken persists (don't regenerate it)
+			if not getgenv().StarLifeKey.SecurityToken then
+				getgenv().StarLifeKey.SecurityToken = tostring(math.random(1000000, 9999999))
+			end
+
+			-- Debug logging
+			print("DEBUG: Global variables set:")
+			print("  CurrentKey:", getgenv().StarLifeKey.CurrentKey)
+			print("  KeyVerified:", getgenv().StarLifeKey.KeyVerified)
+			print("  LoaderAuthenticated:", getgenv().StarLifeKey.LoaderAuthenticated)
+			print("  SecurityToken:", getgenv().StarLifeKey.SecurityToken)
+
 			statusLabel.Text = "✅ Key verified successfully! Loading script..."
 			statusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
 
@@ -414,8 +429,13 @@ local function createUI()
 			task.wait(1)
 			screenGui:Destroy()
 
+			print("DEBUG: About to load main script...")
 			local success, err = loadMainScript()
-			if not success then
+			if success then
+				getgenv().StarLifeKey.ScriptLoaded = true
+				print("DEBUG: Script loaded successfully, ScriptLoaded set to true")
+			else
+				print("DEBUG: Script load failed:", err)
 				statusLabel.Text = "❌ " .. tostring(err)
 				statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
 				sendNotification("Key System", "Failed to load script!", 5)
