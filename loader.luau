@@ -1,21 +1,45 @@
-local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
+local TweenService = game:GetService("TweenService")
 local player = Players.LocalPlayer
 
 local SERVER_URL = "https://key.razzles.xyz" 
 
-_G.CurrentKey = nil
-_G.KeyVerified = false
-_G.ScriptLoaded = false
-_G.LoaderAuthenticated = true 
+local exploitFunctions = {}
 
-local securityToken = tostring(math.random(1000000, 9999999))
-_G.SecurityToken = securityToken
-
-local function verifySecurityIntegrity()
-	return _G.SecurityToken == securityToken and _G.LoaderAuthenticated == true
+if syn and syn.request then
+	exploitFunctions.httpRequest = syn.request
+elseif http and http.request then
+	exploitFunctions.httpRequest = http.request
+elseif http_request then
+	exploitFunctions.httpRequest = http_request
+elseif request then
+	exploitFunctions.httpRequest = request
 end
+
+if syn and syn.write_clipboard then
+	exploitFunctions.setClipboard = syn.write_clipboard
+elseif setclipboard then
+	exploitFunctions.setClipboard = setclipboard
+elseif toclipboard then
+	exploitFunctions.setClipboard = toclipboard
+elseif set_clipboard then
+	exploitFunctions.setClipboard = set_clipboard
+end
+
+if loadstring then
+	exploitFunctions.loadstring = loadstring
+elseif load then
+	exploitFunctions.loadstring = load
+end
+
+getgenv().StarLifeKey = {
+	CurrentKey = nil,
+	KeyVerified = false,
+	ScriptLoaded = false,
+	LoaderAuthenticated = true,
+	SecurityToken = tostring(math.random(1000000, 9999999)),
+}
 
 local function sendNotification(title, text, duration)
 	pcall(function()
@@ -27,153 +51,250 @@ local function sendNotification(title, text, duration)
 	end)
 end
 
-local function verifyKey(keyToVerify)
+local function makeHttpRequest(url, method, data)
+	if not exploitFunctions.httpRequest then
+		warn("No HTTP request function available!")
+		return nil, "HTTP request function not found"
+	end
+
+	local requestData = {
+		Url = url,
+		Method = method or "GET",
+		Headers = {
+			["Content-Type"] = "application/json",
+			["User-Agent"] = "StarLifeFarmer/2.0",
+		},
+	}
+
+	if data then
+		requestData.Body = game:GetService("HttpService"):JSONEncode(data)
+	end
+
 	local success, response = pcall(function()
-		return HttpService:PostAsync(
-			SERVER_URL .. "/verify-key",
-			HttpService:JSONEncode({
-				key = keyToVerify,
-				roblox_id = tostring(player.UserId),
-			}),
-			Enum.HttpContentType.ApplicationJson
-		)
+		return exploitFunctions.httpRequest(requestData)
 	end)
 
-	if success then
-		local data = HttpService:JSONDecode(response)
-		return data.valid, data.reason
+	if success and response then
+		return response.Body, response.StatusCode
+	else
+		return nil, tostring(response)
+	end
+end
+
+local function verifyKey(keyToVerify)
+	local responseBody, statusCode = makeHttpRequest(SERVER_URL .. "/verify-key", "POST", {
+		key = keyToVerify,
+		roblox_id = tostring(player.UserId),
+		exploit = "client-side",
+	})
+
+	if responseBody then
+		local success, data = pcall(function()
+			return game:GetService("HttpService"):JSONDecode(responseBody)
+		end)
+
+		if success and data then
+			return data.valid, data.reason
+		else
+			return false, "Invalid server response"
+		end
 	else
 
 		pcall(function()
-			HttpService:PostAsync(
-				SERVER_URL .. "/log-bypass-attempt",
-				HttpService:JSONEncode({
-					roblox_id = tostring(player.UserId),
-					reason = "Failed to connect to key verification server - Possible server bypass attempt",
-				}),
-				Enum.HttpContentType.ApplicationJson
-			)
+			makeHttpRequest(SERVER_URL .. "/log-bypass-attempt", "POST", {
+				roblox_id = tostring(player.UserId),
+				reason = "Failed to connect to key verification server",
+				error = tostring(statusCode),
+			})
 		end)
-		return false, "Failed to connect to server: " .. tostring(response)
+		return false, "Failed to connect to server: " .. tostring(statusCode)
 	end
 end
 
 local function unloadScript()
-	_G.KeyVerified = false
-	_G.ScriptLoaded = false
-	_G.CurrentKey = nil
-	_G.LoaderAuthenticated = false 
+	getgenv().StarLifeKey.KeyVerified = false
+	getgenv().StarLifeKey.ScriptLoaded = false
+	getgenv().StarLifeKey.CurrentKey = nil
+	getgenv().StarLifeKey.LoaderAuthenticated = false
 
-	if _G.StarLifeFarmerUnload then
-		_G.StarLifeFarmerUnload()
+	if getgenv().StarLifeFarmerUnload then
+		getgenv().StarLifeFarmerUnload()
 	end
 
-	if player.PlayerGui:FindFirstChild("KeySystemUI") then
-		player.PlayerGui.KeySystemUI:Destroy()
+	local existingUI = player.PlayerGui:FindFirstChild("KeySystemUI")
+	if existingUI then
+		existingUI:Destroy()
 	end
 
 	sendNotification("Key System", "Script unloaded - Key invalid or expired", 5)
 	warn("Key System: Script unloaded due to key validation failure")
 end
 
+local function loadMainScript()
+	local scriptUrl = "https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/main.luau"
+	local responseBody, statusCode = makeHttpRequest(scriptUrl, "GET")
+
+	if responseBody and exploitFunctions.loadstring then
+		local success, err = pcall(function()
+			exploitFunctions.loadstring(responseBody)()
+			getgenv().StarLifeKey.ScriptLoaded = true
+		end)
+
+		if success then
+			sendNotification("Star Life Farmer", "Script loaded successfully!", 3)
+			return true
+		else
+			warn("Failed to execute script: " .. tostring(err))
+			return false, "Failed to execute script: " .. tostring(err)
+		end
+	else
+		warn("Failed to download script: " .. tostring(statusCode))
+		return false, "Failed to download script: " .. tostring(statusCode)
+	end
+end
+
 local function createUI()
-	if player.PlayerGui:FindFirstChild("KeySystemUI") then
-		player.PlayerGui.KeySystemUI:Destroy()
+
+	local existingUI = player.PlayerGui:FindFirstChild("KeySystemUI")
+	if existingUI then
+		existingUI:Destroy()
 	end
 
-	local screenGui = Instance.new("ScreenGui", player.PlayerGui)
+	local screenGui = Instance.new("ScreenGui")
 	screenGui.Name = "KeySystemUI"
 	screenGui.ResetOnSpawn = false
+	screenGui.Parent = player.PlayerGui
 
-	local mainFrame = Instance.new("Frame", screenGui)
-	mainFrame.Size = UDim2.new(0, 450, 0, 300)
-	mainFrame.Position = UDim2.new(0.5, -225, 0.5, -150)
-	mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	local mainFrame = Instance.new("Frame")
+	mainFrame.Size = UDim2.new(0, 450, 0, 320)
+	mainFrame.Position = UDim2.new(0.5, -225, 0.5, -160)
+	mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 	mainFrame.BorderSizePixel = 0
+	mainFrame.Parent = screenGui
 
-	local corner = Instance.new("UICorner", mainFrame)
-	corner.CornerRadius = UDim.new(0, 8)
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, 12)
+	corner.Parent = mainFrame
 
-	local stroke = Instance.new("UIStroke", mainFrame)
-	stroke.Color = Color3.fromRGB(60, 60, 60)
+	local stroke = Instance.new("UIStroke")
+	stroke.Color = Color3.fromRGB(70, 70, 70)
 	stroke.Thickness = 2
+	stroke.Parent = mainFrame
 
-	local title = Instance.new("TextLabel", mainFrame)
-	title.Size = UDim2.new(1, 0, 0, 40)
-	title.Text = "🔑 Key System - Star Life Farmer"
+	local gradient = Instance.new("UIGradient")
+	gradient.Color = ColorSequence.new({
+		ColorSequenceKeypoint.new(0, Color3.fromRGB(25, 25, 25)),
+		ColorSequenceKeypoint.new(1, Color3.fromRGB(15, 15, 15)),
+	})
+	gradient.Rotation = 45
+	gradient.Parent = mainFrame
+
+	local titleBar = Instance.new("Frame")
+	titleBar.Size = UDim2.new(1, 0, 0, 50)
+	titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+	titleBar.BorderSizePixel = 0
+	titleBar.Parent = mainFrame
+
+	local titleCorner = Instance.new("UICorner")
+	titleCorner.CornerRadius = UDim.new(0, 12)
+	titleCorner.Parent = titleBar
+
+	local title = Instance.new("TextLabel")
+	title.Size = UDim2.new(1, 0, 1, 0)
+	title.Text = "🔑 Star Life Farmer Key System"
 	title.TextColor3 = Color3.fromRGB(255, 255, 255)
-	title.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	title.BackgroundTransparency = 1
 	title.Font = Enum.Font.GothamBold
-	title.TextSize = 16
-	title.BorderSizePixel = 0
+	title.TextSize = 18
+	title.Parent = titleBar
 
-	local titleCorner = Instance.new("UICorner", title)
-	titleCorner.CornerRadius = UDim.new(0, 8)
-
-	local keyInput = Instance.new("TextBox", mainFrame)
+	local keyInput = Instance.new("TextBox")
 	keyInput.Size = UDim2.new(0.85, 0, 0, 45)
-	keyInput.Position = UDim2.new(0.075, 0, 0, 60)
+	keyInput.Position = UDim2.new(0.075, 0, 0, 70)
 	keyInput.PlaceholderText = "Enter your key here..."
 	keyInput.Text = ""
 	keyInput.TextColor3 = Color3.fromRGB(255, 255, 255)
-	keyInput.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	keyInput.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 	keyInput.Font = Enum.Font.Gotham
 	keyInput.TextSize = 14
 	keyInput.BorderSizePixel = 0
 	keyInput.ClearTextOnFocus = false
+	keyInput.Parent = mainFrame
 
-	local inputCorner = Instance.new("UICorner", keyInput)
-	inputCorner.CornerRadius = UDim.new(0, 6)
+	local inputCorner = Instance.new("UICorner")
+	inputCorner.CornerRadius = UDim.new(0, 8)
+	inputCorner.Parent = keyInput
 
-	local inputStroke = Instance.new("UIStroke", keyInput)
-	inputStroke.Color = Color3.fromRGB(80, 80, 80)
+	local inputStroke = Instance.new("UIStroke")
+	inputStroke.Color = Color3.fromRGB(60, 60, 60)
 	inputStroke.Thickness = 1
+	inputStroke.Parent = keyInput
 
-	local verifyButton = Instance.new("TextButton", mainFrame)
+	local verifyButton = Instance.new("TextButton")
 	verifyButton.Size = UDim2.new(0.4, 0, 0, 45)
-	verifyButton.Position = UDim2.new(0.075, 0, 0, 125)
+	verifyButton.Position = UDim2.new(0.075, 0, 0, 135)
 	verifyButton.Text = "✓ Verify Key"
 	verifyButton.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
 	verifyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 	verifyButton.Font = Enum.Font.GothamBold
 	verifyButton.TextSize = 14
 	verifyButton.BorderSizePixel = 0
+	verifyButton.Parent = mainFrame
 
-	local verifyCorner = Instance.new("UICorner", verifyButton)
-	verifyCorner.CornerRadius = UDim.new(0, 6)
+	local verifyCorner = Instance.new("UICorner")
+	verifyCorner.CornerRadius = UDim.new(0, 8)
+	verifyCorner.Parent = verifyButton
 
-	local getKeyButton = Instance.new("TextButton", mainFrame)
+	local getKeyButton = Instance.new("TextButton")
 	getKeyButton.Size = UDim2.new(0.4, 0, 0, 45)
-	getKeyButton.Position = UDim2.new(0.525, 0, 0, 125)
+	getKeyButton.Position = UDim2.new(0.525, 0, 0, 135)
 	getKeyButton.Text = "🔗 Get Key"
 	getKeyButton.BackgroundColor3 = Color3.fromRGB(0, 150, 85)
 	getKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 	getKeyButton.Font = Enum.Font.GothamBold
 	getKeyButton.TextSize = 14
 	getKeyButton.BorderSizePixel = 0
+	getKeyButton.Parent = mainFrame
 
-	local getKeyCorner = Instance.new("UICorner", getKeyButton)
-	getKeyCorner.CornerRadius = UDim.new(0, 6)
+	local getKeyCorner = Instance.new("UICorner")
+	getKeyCorner.CornerRadius = UDim.new(0, 8)
+	getKeyCorner.Parent = getKeyButton
 
-	local statusLabel = Instance.new("TextLabel", mainFrame)
-	statusLabel.Size = UDim2.new(0.9, 0, 0, 60)
-	statusLabel.Position = UDim2.new(0.05, 0, 0, 190)
-	statusLabel.Text = "Welcome! Please enter your key or get a new one."
+	local statusLabel = Instance.new("TextLabel")
+	statusLabel.Size = UDim2.new(0.9, 0, 0, 80)
+	statusLabel.Position = UDim2.new(0.05, 0, 0, 200)
+	statusLabel.Text =
+		"Welcome! Please enter your key or get a new one.\n\nCompatible with KRNL, Synapse X, Fluxus and other exploits."
 	statusLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
 	statusLabel.BackgroundTransparency = 1
 	statusLabel.Font = Enum.Font.Gotham
 	statusLabel.TextSize = 12
 	statusLabel.TextWrapped = true
 	statusLabel.TextYAlignment = Enum.TextYAlignment.Top
+	statusLabel.Parent = mainFrame
 
-	local infoLabel = Instance.new("TextLabel", mainFrame)
-	infoLabel.Size = UDim2.new(0.9, 0, 0, 30)
-	infoLabel.Position = UDim2.new(0.05, 0, 0, 260)
-	infoLabel.Text = "Made by Razzles | Star Life Farmer v2.0"
+	local infoLabel = Instance.new("TextLabel")
+	infoLabel.Size = UDim2.new(0.9, 0, 0, 25)
+	infoLabel.Position = UDim2.new(0.05, 0, 0, 290)
+	infoLabel.Text = "Made by Razzles | Star Life Farmer v2.0 | Exploit-Optimized"
 	infoLabel.TextColor3 = Color3.fromRGB(120, 120, 120)
 	infoLabel.BackgroundTransparency = 1
 	infoLabel.Font = Enum.Font.Gotham
 	infoLabel.TextSize = 10
+	infoLabel.Parent = mainFrame
+
+	local function animateButton(button, hoverColor, normalColor)
+		button.MouseEnter:Connect(function()
+			TweenService:Create(button, TweenInfo.new(0.2), { BackgroundColor3 = hoverColor }):Play()
+		end)
+
+		button.MouseLeave:Connect(function()
+			TweenService:Create(button, TweenInfo.new(0.2), { BackgroundColor3 = normalColor }):Play()
+		end)
+	end
+
+	animateButton(verifyButton, Color3.fromRGB(20, 140, 235), Color3.fromRGB(0, 120, 215))
+	animateButton(getKeyButton, Color3.fromRGB(20, 170, 105), Color3.fromRGB(0, 150, 85))
 
 	verifyButton.MouseButton1Click:Connect(function()
 		local enteredKey = keyInput.Text:gsub("%s+", "") 
@@ -183,32 +304,28 @@ local function createUI()
 			return
 		end
 
-		statusLabel.Text = "🔄 Verifying key..."
+		statusLabel.Text = "🔄 Verifying key with server..."
 		statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
 		verifyButton.Text = "Verifying..."
 		verifyButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
 
-		wait(0.5) 
+		task.wait(0.5) 
 
 		local isValid, reason = verifyKey(enteredKey)
 		if isValid then
-			_G.CurrentKey = enteredKey
-			_G.KeyVerified = true
+			getgenv().StarLifeKey.CurrentKey = enteredKey
+			getgenv().StarLifeKey.KeyVerified = true
 			statusLabel.Text = "✅ Key verified successfully! Loading script..."
 			statusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
 
 			sendNotification("Key System", "Key verified! Loading Star Life Farmer...", 3)
 
-			wait(1)
+			task.wait(1)
 			screenGui:Destroy()
 
-			local success, err = pcall(function()
-				loadstring(game:HttpGet("https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/main.luau"))()
-				_G.ScriptLoaded = true
-			end)
-
+			local success, err = loadMainScript()
 			if not success then
-				statusLabel.Text = "❌ Failed to load script: " .. tostring(err)
+				statusLabel.Text = "❌ " .. tostring(err)
 				statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
 				sendNotification("Key System", "Failed to load script!", 5)
 			end
@@ -222,24 +339,25 @@ local function createUI()
 	end)
 
 	getKeyButton.MouseButton1Click:Connect(function()
-
-		local success = pcall(function()
-			setclipboard(SERVER_URL)
-		end)
+		local success = false
+		if exploitFunctions.setClipboard then
+			success = pcall(function()
+				exploitFunctions.setClipboard(SERVER_URL)
+			end)
+		end
 
 		if success then
-			statusLabel.Text =
-				"📋 Key link copied to clipboard!\nPaste it in your browser and follow the steps to get your key."
+			statusLabel.Text = "📋 Key link copied to clipboard!\nPaste it in your browser to get your key."
 			statusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
-			sendNotification("Key System", "Key link copied to clipboard! Paste in browser to get your key.", 7)
+			sendNotification("Key System", "Key link copied! Paste in browser to get your key.", 7)
 		else
-			statusLabel.Text = "❌ Clipboard not supported. Visit: " .. SERVER_URL
+			statusLabel.Text = "❌ Clipboard not supported.\nVisit: " .. SERVER_URL
 			statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
 			sendNotification("Key System", "Visit " .. SERVER_URL .. " to get your key", 7)
 		end
 	end)
 
-	local dragToggle = nil
+	local dragToggle = false
 	local dragSpeed = 0.25
 	local dragStart = nil
 	local startPos = nil
@@ -248,10 +366,10 @@ local function createUI()
 		local delta = input.Position - dragStart
 		local position =
 			UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-		game:GetService("TweenService"):Create(mainFrame, TweenInfo.new(dragSpeed), { Position = position }):Play()
+		TweenService:Create(mainFrame, TweenInfo.new(dragSpeed), { Position = position }):Play()
 	end
 
-	title.InputBegan:Connect(function(input)
+	titleBar.InputBegan:Connect(function(input)
 		if
 			input.UserInputType == Enum.UserInputType.MouseButton1
 			or input.UserInputType == Enum.UserInputType.Touch
@@ -267,7 +385,7 @@ local function createUI()
 		end
 	end)
 
-	title.InputChanged:Connect(function(input)
+	titleBar.InputChanged:Connect(function(input)
 		if
 			input.UserInputType == Enum.UserInputType.MouseMovement
 			or input.UserInputType == Enum.UserInputType.Touch
@@ -280,45 +398,67 @@ local function createUI()
 end
 
 local function startKeyVerificationLoop()
-	coroutine.wrap(function()
-		while wait(300) do 
-			if _G.CurrentKey and _G.KeyVerified then
-				local isValid, reason = verifyKey(_G.CurrentKey)
+	task.spawn(function()
+		while task.wait(300) do 
+			if getgenv().StarLifeKey.CurrentKey and getgenv().StarLifeKey.KeyVerified then
+				local isValid, reason = verifyKey(getgenv().StarLifeKey.CurrentKey)
 				if not isValid then
 					warn("Key System: Key verification failed - " .. tostring(reason))
 
 					pcall(function()
-						HttpService:PostAsync(
-							SERVER_URL .. "/log-key-validation",
-							HttpService:JSONEncode({
-								roblox_id = tostring(player.UserId),
-								key = _G.CurrentKey,
-								validation_result = "failed",
-								failure_reason = tostring(reason),
-							}),
-							Enum.HttpContentType.ApplicationJson
-						)
+						makeHttpRequest(SERVER_URL .. "/log-key-validation", "POST", {
+							roblox_id = tostring(player.UserId),
+							key = getgenv().StarLifeKey.CurrentKey,
+							validation_result = "failed",
+							failure_reason = tostring(reason),
+						})
 					end)
 
 					unloadScript()
-
 					createUI()
 					break
 				end
 			end
 		end
-	end)()
+	end)
 end
 
-function _G.ShowKeyUI()
+getgenv().ShowKeyUI = function()
 	createUI()
 end
 
-function _G.StarLifeKeySystemUnload()
+getgenv().StarLifeKeySystemUnload = function()
 	unloadScript()
 end
 
-createUI()
-startKeyVerificationLoop()
+local function checkExploitCompatibility()
+	local compatible = false
+	local exploitName = "Unknown"
 
-sendNotification("Key System", "Star Life Farmer Key System loaded!", 3)
+	if exploitFunctions.httpRequest and exploitFunctions.loadstring then
+		compatible = true
+
+		if syn then
+			exploitName = "Synapse X"
+		elseif http then
+			exploitName = "KRNL"
+		elseif request then
+			exploitName = "Fluxus"
+		else
+			exploitName = "Generic Exploit"
+		end
+	end
+
+	return compatible, exploitName
+end
+
+local isCompatible, exploitName = checkExploitCompatibility()
+
+if isCompatible then
+	createUI()
+	startKeyVerificationLoop()
+	sendNotification("Key System", "Star Life Farmer loaded on " .. exploitName, 3)
+else
+	warn("Exploit not compatible! This loader requires HTTP request and loadstring functions.")
+	sendNotification("Error", "Exploit not compatible with this loader!", 10)
+end
