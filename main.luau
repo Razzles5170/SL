@@ -1,11 +1,15 @@
-if not _G.LoaderAuthenticated or not _G.SecurityToken then
+if
+	not getgenv().StarLifeKey
+	or not getgenv().StarLifeKey.LoaderAuthenticated
+	or not getgenv().StarLifeKey.SecurityToken
+then
 	local HttpService = game:GetService("HttpService")
 	local Players = game:GetService("Players")
 	local player = Players.LocalPlayer
 	local SERVER_URL = "https://key.razzles.xyz"
 
 	local bypassReason = "Script executed without loader authentication"
-	if not _G.SecurityToken then
+	if not getgenv().StarLifeKey or not getgenv().StarLifeKey.SecurityToken then
 		bypassReason = bypassReason .. " - Security token missing (possible tampering)"
 	end
 
@@ -40,7 +44,7 @@ if not _G.LoaderAuthenticated or not _G.SecurityToken then
 	return 
 end
 
-if not _G.CurrentKey or not _G.KeyVerified then
+if not getgenv().StarLifeKey or not getgenv().StarLifeKey.CurrentKey or not getgenv().StarLifeKey.KeyVerified then
 	local HttpService = game:GetService("HttpService")
 	local Players = game:GetService("Players")
 	local player = Players.LocalPlayer
@@ -68,7 +72,7 @@ if not _G.CurrentKey or not _G.KeyVerified then
 	return
 end
 
-_G.StarLifeFarmerUnload = function()
+getgenv().StarLifeFarmerUnload = function()
 
 	if rareClickLoop then
 		rareClickLoop = false
@@ -97,7 +101,7 @@ _G.StarLifeFarmerUnload = function()
 		end)
 	end
 
-	_G.LoaderAuthenticated = false
+	getgenv().StarLifeKey.LoaderAuthenticated = false
 
 	pcall(function()
 		game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -147,23 +151,23 @@ end
 
 coroutine.wrap(function()
 	while wait(300) do 
-		if _G.CurrentKey then
-			local isValid, reason = verifyKey(_G.CurrentKey)
+		if getgenv().StarLifeKey and getgenv().StarLifeKey.CurrentKey then
+			local isValid, reason = verifyKey(getgenv().StarLifeKey.CurrentKey)
 			if not isValid then
 				warn("Star Life Farmer: Key verification failed - " .. tostring(reason))
-				if _G.StarLifeFarmerUnload then
-					_G.StarLifeFarmerUnload()
+				if getgenv().StarLifeFarmerUnload then
+					getgenv().StarLifeFarmerUnload()
 				end
 
-				if _G.ShowKeyUI then
-					_G.ShowKeyUI()
+				if getgenv().ShowKeyUI then
+					getgenv().ShowKeyUI()
 				end
 				break
 			end
 		else
 
-			if _G.StarLifeFarmerUnload then
-				_G.StarLifeFarmerUnload()
+			if getgenv().StarLifeFarmerUnload then
+				getgenv().StarLifeFarmerUnload()
 			end
 			break
 		end
