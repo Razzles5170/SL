@@ -1,4 +1,5 @@
-
+-- Star Life Farmer Key System Loader (Optimized for KRNL and Client-side Exploits)
+-- Made by Razzles | Compatible with KRNL, Synapse X, Fluxus, etc.
 
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
@@ -115,7 +116,6 @@ local function getUserId()
 		elseif game:GetService("Players").LocalPlayer and game:GetService("Players").LocalPlayer.Name then
 			username = game:GetService("Players").LocalPlayer.Name
 		end
-
 		if username then
 			-- Use Roblox API to get user ID from username
 			local apiResponse, statusCode = makeHttpRequest("https://users.roblox.com/v1/usernames/users", "POST", {
@@ -210,7 +210,7 @@ local function unloadScript()
 end
 
 local function loadMainScript()
-	local scriptUrl = "https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/main.luau"
+	local scriptUrl = "https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/farmerscript.luau"
 	local responseBody, statusCode = makeHttpRequest(scriptUrl, "GET")
 
 	if responseBody and exploitFunctions.loadstring then
