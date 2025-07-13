@@ -1,5 +1,4 @@
--- Star Life Farmer Key System Loader (Optimized for KRNL and Client-side Exploits)
--- Made by Razzles | Compatible with KRNL, Synapse X, Fluxus, etc.
+
 
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
