@@ -1,5 +1,3 @@
--- Star Life Farmer Key System Loader (Optimized for KRNL and Client-side Exploits)
--- Made by Razzles | Compatible with KRNL, Synapse X, Fluxus, etc.
 
 local Players = game:GetService("Players")
 local StarterGui = game:GetService("StarterGui")
@@ -75,7 +73,7 @@ local function makeHttpRequest(url, method, data)
 	}
 
 	if data then
-		requestData.Body = game:GetService("HttpService"):JSONEncode(data)
+		requestData.Body = game:JSONEncode(data)
 	end
 
 	local success, response = pcall(function()
@@ -124,7 +122,7 @@ local function getUserId()
 			})
 
 			if apiResponse then
-				local data = game:GetService("HttpService"):JSONDecode(apiResponse)
+				local data = game:JSONDecode(apiResponse)
 				if data and data.data and #data.data > 0 then
 					local userData = data.data[1]
 					if userData.id and userData.id ~= 0 then
@@ -168,7 +166,7 @@ local function verifyKey(keyToVerify)
 
 	if responseBody then
 		local success, data = pcall(function()
-			return game:GetService("HttpService"):JSONDecode(responseBody)
+			return game:JSONDecode(responseBody)
 		end)
 
 		if success and data then
