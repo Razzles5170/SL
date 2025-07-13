@@ -1,1154 +1,324 @@
-local l_1_0 = { 72, 116, 116, 112, 83, 101, 114, 118, 105, 99, 101 }
-local l_2_0 = { 80, 108, 97, 121, 101, 114, 115 }
-local l_3_0 = { 83, 116, 97, 114, 116, 101, 114, 71, 117, 105 }
-local l_4_0 =
-	{ 104, 116, 116, 112, 115, 58, 47, 47, 107, 101, 121, 46, 114, 97, 122, 122, 108, 101, 115, 46, 120, 121, 122 }
-local l_5_0 = { 67, 117, 114, 114, 101, 110, 116, 75, 101, 121 }
-local l_6_0 = { 75, 101, 121, 86, 101, 114, 105, 102, 105, 101, 100 }
-local l_7_0 = { 83, 99, 114, 105, 112, 116, 76, 111, 97, 100, 101, 100 }
-local l_8_0 = { 76, 111, 97, 100, 101, 114, 65, 117, 116, 104, 101, 110, 116, 105, 99, 97, 116, 101, 100 }
-local l_9_0 = { 83, 101, 99, 117, 114, 105, 116, 121, 84, 111, 107, 101, 110 }
-local l_10_0 = { 83, 101, 110, 100, 78, 111, 116, 105, 102, 105, 99, 97, 116, 105, 111, 110 }
-local l_11_0 = { 84, 105, 116, 108, 101 }
-local l_12_0 = { 84, 101, 120, 116 }
-local l_13_0 = { 68, 117, 114, 97, 116, 105, 111, 110 }
-local l_14_0 = { 47, 118, 101, 114, 105, 102, 121, 45, 107, 101, 121 }
-local l_15_0 = { 107, 101, 121 }
-local l_16_0 = { 114, 111, 98, 108, 111, 120, 95, 105, 100 }
-local l_17_0 = { 118, 97, 108, 105, 100 }
-local l_18_0 = { 114, 101, 97, 115, 111, 110 }
-local l_19_0 = { 47, 108, 111, 103, 45, 98, 121, 112, 97, 115, 115, 45, 97, 116, 116, 101, 109, 112, 116 }
-local l_20_0 = {
-	70,
-	97,
-	105,
-	108,
-	101,
-	100,
-	32,
-	116,
-	111,
-	32,
-	99,
-	111,
-	110,
-	110,
-	101,
-	99,
-	116,
-	32,
-	116,
-	111,
-	32,
-	107,
-	101,
-	121,
-	32,
-	118,
-	101,
-	114,
-	105,
-	102,
-	105,
-	99,
-	97,
-	116,
-	105,
-	111,
-	110,
-	32,
-	115,
-	101,
-	114,
-	118,
-	101,
-	114,
-	32,
-	45,
-	32,
-	80,
-	111,
-	115,
-	115,
-	105,
-	98,
-	108,
-	101,
-	32,
-	115,
-	101,
-	114,
-	118,
-	101,
-	114,
-	32,
-	98,
-	121,
-	112,
-	97,
-	115,
-	115,
-	32,
-	97,
-	116,
-	116,
-	101,
-	109,
-	112,
-	116,
-}
-local l_21_0 = {
-	70,
-	97,
-	105,
-	108,
-	101,
-	100,
-	32,
-	116,
-	111,
-	32,
-	99,
-	111,
-	110,
-	110,
-	101,
-	99,
-	116,
-	32,
-	116,
-	111,
-	32,
-	115,
-	101,
-	114,
-	118,
-	101,
-	114,
-	58,
-	32,
-}
-local l_22_0 = { 83, 116, 97, 114, 76, 105, 102, 101, 70, 97, 114, 109, 101, 114, 85, 110, 108, 111, 97, 100 }
-local l_23_0 = { 75, 101, 121, 83, 121, 115, 116, 101, 109, 85, 73 }
-local l_24_0 = { 75, 101, 121, 32, 83, 121, 115, 116, 101, 109 }
-local l_25_0 = {
-	83,
-	99,
-	114,
-	105,
-	112,
-	116,
-	32,
-	117,
-	110,
-	108,
-	111,
-	97,
-	100,
-	101,
-	100,
-	32,
-	45,
-	32,
-	75,
-	101,
-	121,
-	32,
-	105,
-	110,
-	118,
-	97,
-	108,
-	105,
-	100,
-	32,
-	111,
-	114,
-	32,
-	101,
-	120,
-	112,
-	105,
-	114,
-	101,
-	100,
-}
-local l_26_0 = {
-	75,
-	101,
-	121,
-	32,
-	83,
-	121,
-	115,
-	116,
-	101,
-	109,
-	58,
-	32,
-	83,
-	99,
-	114,
-	105,
-	112,
-	116,
-	32,
-	117,
-	110,
-	108,
-	111,
-	97,
-	100,
-	101,
-	100,
-	32,
-	100,
-	117,
-	101,
-	32,
-	116,
-	111,
-	32,
-	107,
-	101,
-	121,
-	32,
-	118,
-	97,
-	108,
-	105,
-	100,
-	97,
-	116,
-	105,
-	111,
-	110,
-	32,
-	102,
-	97,
-	105,
-	108,
-	117,
-	114,
-	101,
-}
-local l_27_0 = { 83, 99, 114, 101, 101, 110, 71, 117, 105 }
-local l_28_0 = { 70, 114, 97, 109, 101 }
-local l_29_0 = { 85, 73, 67, 111, 114, 110, 101, 114 }
-local l_30_0 = { 85, 73, 83, 116, 114, 111, 107, 101 }
-local l_31_0 = { 84, 101, 120, 116, 76, 97, 98, 101, 108 }
-local l_32_0 = {
-	240,
-	159,
-	151,
-	137,
-	32,
-	75,
-	101,
-	121,
-	32,
-	83,
-	121,
-	115,
-	116,
-	101,
-	109,
-	32,
-	45,
-	32,
-	83,
-	116,
-	97,
-	114,
-	32,
-	76,
-	105,
-	102,
-	101,
-	32,
-	70,
-	97,
-	114,
-	109,
-	101,
-	114,
-}
-local l_33_0 = { 84, 101, 120, 116, 66, 111, 120 }
-local l_34_0 = { 69, 110, 116, 101, 114, 32, 121, 111, 117, 114, 32, 107, 101, 121, 32, 104, 101, 114, 101, 46, 46, 46 }
-local l_35_0 = {}
-local l_36_0 = { 84, 101, 120, 116, 66, 117, 116, 116, 111, 110 }
-local l_37_0 = { 226, 156, 147, 32, 86, 101, 114, 105, 102, 121, 32, 75, 101, 121 }
-local l_38_0 = { 240, 159, 149, 152, 32, 71, 101, 116, 32, 75, 101, 121 }
-local l_39_0 = {
-	87,
-	101,
-	108,
-	99,
-	111,
-	109,
-	101,
-	33,
-	32,
-	80,
-	108,
-	101,
-	97,
-	115,
-	101,
-	32,
-	101,
-	110,
-	116,
-	101,
-	114,
-	32,
-	121,
-	111,
-	117,
-	114,
-	32,
-	107,
-	101,
-	121,
-	32,
-	111,
-	114,
-	32,
-	103,
-	101,
-	116,
-	32,
-	97,
-	32,
-	110,
-	101,
-	119,
-	32,
-	111,
-	110,
-	101,
-	46,
-}
-local l_40_0 = {
-	77,
-	97,
-	100,
-	101,
-	32,
-	98,
-	121,
-	32,
-	116,
-	104,
-	111,
-	115,
-	101,
-	119,
-	104,
-	111,
-	107,
-	110,
-	111,
-	119,
-}
-local l_41_0 = { 37, 115, 43 }
-local l_42_0 =
-	{ 226, 157, 148, 32, 80, 108, 101, 97, 115, 101, 32, 101, 110, 116, 101, 114, 32, 97, 32, 107, 101, 121, 46 }
-local l_43_0 = { 240, 159, 148, 141, 32, 86, 101, 114, 105, 102, 121, 105, 110, 103, 32, 107, 101, 121, 46, 46, 46 }
-local l_44_0 = { 86, 101, 114, 105, 102, 121, 105, 110, 103, 46, 46, 46 }
-local l_45_0 = {
-	226,
-	156,
-	149,
-	32,
-	75,
-	101,
-	121,
-	32,
-	118,
-	101,
-	114,
-	105,
-	102,
-	105,
-	101,
-	100,
-	32,
-	115,
-	117,
-	99,
-	99,
-	101,
-	115,
-	115,
-	102,
-	117,
-	108,
-	108,
-	121,
-	33,
-	32,
-	76,
-	111,
-	97,
-	100,
-	105,
-	110,
-	103,
-	32,
-	115,
-	99,
-	114,
-	105,
-	112,
-	116,
-	46,
-	46,
-	46,
-}
-local l_46_0 = {
-	75,
-	101,
-	121,
-	32,
-	118,
-	101,
-	114,
-	105,
-	102,
-	105,
-	101,
-	100,
-	33,
-	32,
-	76,
-	111,
-	97,
-	100,
-	105,
-	110,
-	103,
-	32,
-	83,
-	116,
-	97,
-	114,
-	32,
-	76,
-	105,
-	102,
-	101,
-	32,
-	70,
-	97,
-	114,
-	109,
-	101,
-	114,
-	46,
-	46,
-	46,
-}
-local l_47_0 = {
-	104,
-	116,
-	116,
-	112,
-	115,
-	58,
-	47,
-	47,
-	114,
-	97,
-	119,
-	46,
-	103,
-	105,
-	116,
-	104,
-	117,
-	98,
-	117,
-	115,
-	101,
-	114,
-	99,
-	111,
-	110,
-	116,
-	101,
-	110,
-	116,
-	46,
-	99,
-	111,
-	109,
-	47,
-	82,
-	97,
-	122,
-	122,
-	108,
-	101,
-	115,
-	53,
-	49,
-	55,
-	48,
-	47,
-	83,
-	76,
-	47,
-	114,
-	101,
-	102,
-	115,
-	47,
-	104,
-	101,
-	97,
-	100,
-	115,
-	47,
-	109,
-	97,
-	105,
-	110,
-	47,
-	109,
-	97,
-	105,
-	110,
-	46,
-	108,
-	117,
-	97,
-	117,
-}
-local l_48_0 = {
-	226,
-	157,
-	148,
-	32,
-	70,
-	97,
-	105,
-	108,
-	101,
-	100,
-	32,
-	116,
-	111,
-	32,
-	108,
-	111,
-	97,
-	100,
-	32,
-	115,
-	99,
-	114,
-	105,
-	112,
-	116,
-	58,
-	32,
-}
-local l_49_0 = { 70, 97, 105, 108, 101, 100, 32, 116, 111, 32, 108, 111, 97, 100, 32, 115, 99, 114, 105, 112, 116, 33 }
-local l_50_0 = { 226, 157, 148, 32 }
-local l_51_0 = {
-	75,
-	101,
-	121,
-	32,
-	118,
-	101,
-	114,
-	105,
-	102,
-	105,
-	99,
-	97,
-	116,
-	105,
-	111,
-	110,
-	32,
-	102,
-	97,
-	105,
-	108,
-	101,
-	100,
-	58,
-	32,
-}
-local l_52_0 = { 115, 101, 116, 99, 108, 105, 112, 98, 111, 97, 114, 100 }
-local l_53_0 = {
-	240,
-	159,
-	148,
-	139,
-	32,
-	75,
-	101,
-	121,
-	32,
-	108,
-	105,
-	110,
-	107,
-	32,
-	99,
-	111,
-	112,
-	105,
-	101,
-	100,
-	32,
-	116,
-	111,
-	32,
-	99,
-	108,
-	105,
-	112,
-	98,
-	111,
-	97,
-	114,
-	100,
-	33,
-	10,
-	80,
-	97,
-	115,
-	116,
-	101,
-	32,
-	105,
-	116,
-	32,
-	105,
-	110,
-	32,
-	121,
-	111,
-	117,
-	114,
-	32,
-	98,
-	114,
-	111,
-	119,
-	115,
-	101,
-	114,
-	32,
-	97,
-	110,
-	100,
-	32,
-	102,
-	111,
-	108,
-	108,
-	111,
-	119,
-	32,
-	116,
-	104,
-	101,
-	32,
-	115,
-	116,
-	101,
-	112,
-	115,
-	32,
-	116,
-	111,
-	32,
-	103,
-	101,
-	116,
-	32,
-	121,
-	111,
-	117,
-	114,
-	32,
-	107,
-	101,
-	121,
-	46,
-}
-local l_54_0 = {
-	75,
-	101,
-	121,
-	32,
-	108,
-	105,
-	110,
-	107,
-	32,
-	99,
-	111,
-	112,
-	105,
-	101,
-	100,
-	32,
-	116,
-	111,
-	32,
-	99,
-	108,
-	105,
-	112,
-	98,
-	111,
-	97,
-	114,
-	100,
-	33,
-	32,
-	80,
-	97,
-	115,
-	116,
-	101,
-	32,
-	105,
-	110,
-	32,
-	98,
-	114,
-	111,
-	119,
-	115,
-	101,
-	114,
-	32,
-	116,
-	111,
-	32,
-	103,
-	101,
-	116,
-	32,
-	121,
-	111,
-	117,
-	114,
-	32,
-	107,
-	101,
-	121,
-	46,
-}
-local l_55_0 = {
-	226,
-	157,
-	148,
-	32,
-	67,
-	108,
-	105,
-	112,
-	98,
-	111,
-	97,
-	114,
-	100,
-	32,
-	110,
-	111,
-	116,
-	32,
-	115,
-	117,
-	112,
-	112,
-	111,
-	114,
-	116,
-	101,
-	100,
-	46,
-	32,
-	86,
-	105,
-	115,
-	105,
-	116,
-	58,
-	32,
-}
-local l_56_0 = { 86, 105, 115, 105, 116, 32 }
-local l_57_0 = { 32, 116, 111, 32, 103, 101, 116, 32, 121, 111, 117, 114, 32, 107, 101, 121 }
-local l_58_0 = {
-	75,
-	101,
-	121,
-	32,
-	83,
-	121,
-	115,
-	116,
-	101,
-	109,
-	58,
-	32,
-	75,
-	101,
-	121,
-	32,
-	118,
-	101,
-	114,
-	105,
-	102,
-	105,
-	99,
-	97,
-	116,
-	105,
-	111,
-	110,
-	32,
-	102,
-	97,
-	105,
-	108,
-	101,
-	100,
-	32,
-	45,
-	32,
-}
-local l_59_0 = { 47, 108, 111, 103, 45, 107, 101, 121, 45, 118, 97, 108, 105, 100, 97, 116, 105, 111, 110 }
-local l_60_0 = { 118, 97, 108, 105, 100, 97, 116, 105, 111, 110, 95, 114, 101, 115, 117, 108, 116 }
-local l_61_0 = { 102, 97, 105, 108, 101, 100 }
-local l_62_0 = { 102, 97, 105, 108, 117, 114, 101, 95, 114, 101, 97, 115, 111, 110 }
-local l_63_0 = { 83, 104, 111, 119, 75, 101, 121, 85, 73 }
-local l_64_0 =
-	{ 83, 116, 97, 114, 76, 105, 102, 101, 75, 101, 121, 83, 121, 115, 116, 101, 109, 85, 110, 108, 111, 97, 100 }
-local l_65_0 = {
-	83,
-	116,
-	97,
-	114,
-	32,
-	76,
-	105,
-	102,
-	101,
-	32,
-	70,
-	97,
-	114,
-	109,
-	101,
-	114,
-	32,
-	75,
-	101,
-	121,
-	32,
-	83,
-	121,
-	115,
-	116,
-	101,
-	109,
-	32,
-	108,
-	111,
-	97,
-	100,
-	101,
-	100,
-	33,
-}
-local function l_66_0(l_67_0)
-	local l_68_0 = ""
-	for l_69_0 = 1, #l_67_0 do
-		l_68_0 = l_68_0 .. string.char(l_67_0[l_69_0])
-	end
-	return l_68_0
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local StarterGui = game:GetService("StarterGui")
+local player = Players.LocalPlayer
+
+local SERVER_URL = "https://key.razzles.xyz" 
+
+_G.CurrentKey = nil
+_G.KeyVerified = false
+_G.ScriptLoaded = false
+_G.LoaderAuthenticated = true 
+
+local securityToken = tostring(math.random(1000000, 9999999))
+_G.SecurityToken = securityToken
+
+local function verifySecurityIntegrity()
+	return _G.SecurityToken == securityToken and _G.LoaderAuthenticated == true
 end
-local l_70_0 = game:GetService(l_66_0(l_1_0))
-local l_71_0 = game:GetService(l_66_0(l_2_0))
-local l_72_0 = game:GetService(l_66_0(l_3_0))
-local l_73_0 = l_71_0.LocalPlayer
-local l_74_0 = l_66_0(l_4_0)
-_G[l_66_0(l_5_0)] = nil
-_G[l_66_0(l_6_0)] = false
-_G[l_66_0(l_7_0)] = false
-_G[l_66_0(l_8_0)] = true
-local l_75_0 = tostring(math.random(1000000, 9999999))
-_G[l_66_0(l_9_0)] = l_75_0
-local function l_76_0()
-	return _G[l_66_0(l_9_0)] == l_75_0 and _G[l_66_0(l_8_0)] == true
-end
-local function l_77_0(l_78_0, l_79_0, l_80_0)
+
+local function sendNotification(title, text, duration)
 	pcall(function()
-		l_72_0:SetCore(l_66_0(l_10_0), {
-			[l_66_0(l_11_0)] = l_78_0,
-			[l_66_0(l_12_0)] = l_79_0,
-			[l_66_0(l_13_0)] = l_80_0 or 5,
+		StarterGui:SetCore("SendNotification", {
+			Title = title,
+			Text = text,
+			Duration = duration or 5,
 		})
 	end)
 end
-local function l_81_0(l_82_0)
-	local l_83_0, l_84_0 = pcall(function()
-		return l_70_0:PostAsync(
-			l_74_0 .. l_66_0(l_14_0),
-			l_70_0:JSONEncode({
-				[l_66_0(l_15_0)] = l_82_0,
-				[l_66_0(l_16_0)] = tostring(l_73_0.UserId),
+
+local function verifyKey(keyToVerify)
+	local success, response = pcall(function()
+		return HttpService:PostAsync(
+			SERVER_URL .. "/verify-key",
+			HttpService:JSONEncode({
+				key = keyToVerify,
+				roblox_id = tostring(player.UserId),
 			}),
 			Enum.HttpContentType.ApplicationJson
 		)
 	end)
-	if l_83_0 then
-		local l_85_0 = l_70_0:JSONDecode(l_84_0)
-		return l_85_0[l_66_0(l_17_0)], l_85_0[l_66_0(l_18_0)]
+
+	if success then
+		local data = HttpService:JSONDecode(response)
+		return data.valid, data.reason
 	else
+
 		pcall(function()
-			l_70_0:PostAsync(
-				l_74_0 .. l_66_0(l_19_0),
-				l_70_0:JSONEncode({
-					[l_66_0(l_16_0)] = tostring(l_73_0.UserId),
-					[l_66_0(l_18_0)] = l_66_0(l_20_0),
+			HttpService:PostAsync(
+				SERVER_URL .. "/log-bypass-attempt",
+				HttpService:JSONEncode({
+					roblox_id = tostring(player.UserId),
+					reason = "Failed to connect to key verification server - Possible server bypass attempt",
 				}),
 				Enum.HttpContentType.ApplicationJson
 			)
 		end)
-		return false, l_66_0(l_21_0) .. tostring(l_84_0)
+		return false, "Failed to connect to server: " .. tostring(response)
 	end
 end
-local l_86_0
-local function l_87_0()
-	_G[l_66_0(l_6_0)] = false
-	_G[l_66_0(l_7_0)] = false
-	_G[l_66_0(l_5_0)] = nil
-	_G[l_66_0(l_8_0)] = false
-	if _G[l_66_0(l_22_0)] then
-		_G[l_66_0(l_22_0)]()
+
+local function unloadScript()
+	_G.KeyVerified = false
+	_G.ScriptLoaded = false
+	_G.CurrentKey = nil
+	_G.LoaderAuthenticated = false 
+
+	if _G.StarLifeFarmerUnload then
+		_G.StarLifeFarmerUnload()
 	end
-	if l_73_0.PlayerGui:FindFirstChild(l_66_0(l_23_0)) then
-		l_73_0.PlayerGui[l_66_0(l_23_0)]:Destroy()
+
+	if player.PlayerGui:FindFirstChild("KeySystemUI") then
+		player.PlayerGui.KeySystemUI:Destroy()
 	end
-	l_77_0(l_66_0(l_24_0), l_66_0(l_25_0), 5)
-	warn(l_66_0(l_26_0))
+
+	sendNotification("Key System", "Script unloaded - Key invalid or expired", 5)
+	warn("Key System: Script unloaded due to key validation failure")
 end
-l_86_0 = function()
-	if l_73_0.PlayerGui:FindFirstChild(l_66_0(l_23_0)) then
-		l_73_0.PlayerGui[l_66_0(l_23_0)]:Destroy()
+
+local function createUI()
+	if player.PlayerGui:FindFirstChild("KeySystemUI") then
+		player.PlayerGui.KeySystemUI:Destroy()
 	end
-	local l_88_0 = Instance.new(l_66_0(l_27_0), l_73_0.PlayerGui)
-	l_88_0.Name = l_66_0(l_23_0)
-	l_88_0.ResetOnSpawn = false
-	local l_89_0 = Instance.new(l_66_0(l_28_0), l_88_0)
-	l_89_0.Size = UDim2.new(0, 450, 0, 300)
-	l_89_0.Position = UDim2.new(0.5, -225, 0.5, -150)
-	l_89_0.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-	l_89_0.BorderSizePixel = 0
-	local l_90_0 = Instance.new(l_66_0(l_29_0), l_89_0)
-	l_90_0.CornerRadius = UDim.new(0, 8)
-	local l_91_0 = Instance.new(l_66_0(l_30_0), l_89_0)
-	l_91_0.Color = Color3.fromRGB(60, 60, 60)
-	l_91_0.Thickness = 2
-	local l_92_0 = Instance.new(l_66_0(l_31_0), l_89_0)
-	l_92_0.Size = UDim2.new(1, 0, 0, 40)
-	l_92_0.Text = l_66_0(l_32_0)
-	l_92_0.TextColor3 = Color3.fromRGB(255, 255, 255)
-	l_92_0.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
-	l_92_0.Font = Enum.Font.GothamBold
-	l_92_0.TextSize = 16
-	l_92_0.BorderSizePixel = 0
-	local l_93_0 = Instance.new(l_66_0(l_29_0), l_92_0)
-	l_93_0.CornerRadius = UDim.new(0, 8)
-	local l_94_0 = Instance.new(l_66_0(l_33_0), l_89_0)
-	l_94_0.Size = UDim2.new(0.85, 0, 0, 45)
-	l_94_0.Position = UDim2.new(0.075, 0, 0, 60)
-	l_94_0.PlaceholderText = l_66_0(l_34_0)
-	l_94_0.Text = l_66_0(l_35_0)
-	l_94_0.TextColor3 = Color3.fromRGB(255, 255, 255)
-	l_94_0.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-	l_94_0.Font = Enum.Font.Gotham
-	l_94_0.TextSize = 14
-	l_94_0.BorderSizePixel = 0
-	l_94_0.ClearTextOnFocus = false
-	local l_95_0 = Instance.new(l_66_0(l_29_0), l_94_0)
-	l_95_0.CornerRadius = UDim.new(0, 6)
-	local l_96_0 = Instance.new(l_66_0(l_30_0), l_94_0)
-	l_96_0.Color = Color3.fromRGB(80, 80, 80)
-	l_96_0.Thickness = 1
-	local l_97_0 = Instance.new(l_66_0(l_36_0), l_89_0)
-	l_97_0.Size = UDim2.new(0.4, 0, 0, 45)
-	l_97_0.Position = UDim2.new(0.075, 0, 0, 125)
-	l_97_0.Text = l_66_0(l_37_0)
-	l_97_0.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
-	l_97_0.TextColor3 = Color3.fromRGB(255, 255, 255)
-	l_97_0.Font = Enum.Font.GothamBold
-	l_97_0.TextSize = 14
-	l_97_0.BorderSizePixel = 0
-	local l_98_0 = Instance.new(l_66_0(l_29_0), l_97_0)
-	l_98_0.CornerRadius = UDim.new(0, 6)
-	local l_99_0 = Instance.new(l_66_0(l_36_0), l_89_0)
-	l_99_0.Size = UDim2.new(0.4, 0, 0, 45)
-	l_99_0.Position = UDim2.new(0.525, 0, 0, 125)
-	l_99_0.Text = l_66_0(l_38_0)
-	l_99_0.BackgroundColor3 = Color3.fromRGB(0, 150, 85)
-	l_99_0.TextColor3 = Color3.fromRGB(255, 255, 255)
-	l_99_0.Font = Enum.Font.GothamBold
-	l_99_0.TextSize = 14
-	l_99_0.BorderSizePixel = 0
-	local l_100_0 = Instance.new(l_66_0(l_29_0), l_99_0)
-	l_100_0.CornerRadius = UDim.new(0, 6)
-	local l_101_0 = Instance.new(l_66_0(l_31_0), l_89_0)
-	l_101_0.Size = UDim2.new(0.9, 0, 0, 60)
-	l_101_0.Position = UDim2.new(0.05, 0, 0, 190)
-	l_101_0.Text = l_66_0(l_39_0)
-	l_101_0.TextColor3 = Color3.fromRGB(200, 200, 200)
-	l_101_0.BackgroundTransparency = 1
-	l_101_0.Font = Enum.Font.Gotham
-	l_101_0.TextSize = 12
-	l_101_0.TextWrapped = true
-	l_101_0.TextYAlignment = Enum.TextYAlignment.Top
-	local l_102_0 = Instance.new(l_66_0(l_31_0), l_89_0)
-	l_102_0.Size = UDim2.new(0.9, 0, 0, 30)
-	l_102_0.Position = UDim2.new(0.05, 0, 0, 260)
-	l_102_0.Text = l_66_0(l_40_0)
-	l_102_0.TextColor3 = Color3.fromRGB(120, 120, 120)
-	l_102_0.BackgroundTransparency = 1
-	l_102_0.Font = Enum.Font.Gotham
-	l_102_0.TextSize = 10
-	l_97_0.MouseButton1Click:Connect(function()
-		local l_103_0 = l_94_0.Text:gsub("%s+", "")
-		if l_103_0 == "" then
-			l_101_0.Text = l_66_0(l_42_0)
-			l_101_0.TextColor3 = Color3.fromRGB(255, 100, 100)
+
+	local screenGui = Instance.new("ScreenGui", player.PlayerGui)
+	screenGui.Name = "KeySystemUI"
+	screenGui.ResetOnSpawn = false
+
+	local mainFrame = Instance.new("Frame", screenGui)
+	mainFrame.Size = UDim2.new(0, 450, 0, 300)
+	mainFrame.Position = UDim2.new(0.5, -225, 0.5, -150)
+	mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+	mainFrame.BorderSizePixel = 0
+
+	local corner = Instance.new("UICorner", mainFrame)
+	corner.CornerRadius = UDim.new(0, 8)
+
+	local stroke = Instance.new("UIStroke", mainFrame)
+	stroke.Color = Color3.fromRGB(60, 60, 60)
+	stroke.Thickness = 2
+
+	local title = Instance.new("TextLabel", mainFrame)
+	title.Size = UDim2.new(1, 0, 0, 40)
+	title.Text = "🔑 Key System - Star Life Farmer"
+	title.TextColor3 = Color3.fromRGB(255, 255, 255)
+	title.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+	title.Font = Enum.Font.GothamBold
+	title.TextSize = 16
+	title.BorderSizePixel = 0
+
+	local titleCorner = Instance.new("UICorner", title)
+	titleCorner.CornerRadius = UDim.new(0, 8)
+
+	local keyInput = Instance.new("TextBox", mainFrame)
+	keyInput.Size = UDim2.new(0.85, 0, 0, 45)
+	keyInput.Position = UDim2.new(0.075, 0, 0, 60)
+	keyInput.PlaceholderText = "Enter your key here..."
+	keyInput.Text = ""
+	keyInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+	keyInput.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+	keyInput.Font = Enum.Font.Gotham
+	keyInput.TextSize = 14
+	keyInput.BorderSizePixel = 0
+	keyInput.ClearTextOnFocus = false
+
+	local inputCorner = Instance.new("UICorner", keyInput)
+	inputCorner.CornerRadius = UDim.new(0, 6)
+
+	local inputStroke = Instance.new("UIStroke", keyInput)
+	inputStroke.Color = Color3.fromRGB(80, 80, 80)
+	inputStroke.Thickness = 1
+
+	local verifyButton = Instance.new("TextButton", mainFrame)
+	verifyButton.Size = UDim2.new(0.4, 0, 0, 45)
+	verifyButton.Position = UDim2.new(0.075, 0, 0, 125)
+	verifyButton.Text = "✓ Verify Key"
+	verifyButton.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
+	verifyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	verifyButton.Font = Enum.Font.GothamBold
+	verifyButton.TextSize = 14
+	verifyButton.BorderSizePixel = 0
+
+	local verifyCorner = Instance.new("UICorner", verifyButton)
+	verifyCorner.CornerRadius = UDim.new(0, 6)
+
+	local getKeyButton = Instance.new("TextButton", mainFrame)
+	getKeyButton.Size = UDim2.new(0.4, 0, 0, 45)
+	getKeyButton.Position = UDim2.new(0.525, 0, 0, 125)
+	getKeyButton.Text = "🔗 Get Key"
+	getKeyButton.BackgroundColor3 = Color3.fromRGB(0, 150, 85)
+	getKeyButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+	getKeyButton.Font = Enum.Font.GothamBold
+	getKeyButton.TextSize = 14
+	getKeyButton.BorderSizePixel = 0
+
+	local getKeyCorner = Instance.new("UICorner", getKeyButton)
+	getKeyCorner.CornerRadius = UDim.new(0, 6)
+
+	local statusLabel = Instance.new("TextLabel", mainFrame)
+	statusLabel.Size = UDim2.new(0.9, 0, 0, 60)
+	statusLabel.Position = UDim2.new(0.05, 0, 0, 190)
+	statusLabel.Text = "Welcome! Please enter your key or get a new one."
+	statusLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+	statusLabel.BackgroundTransparency = 1
+	statusLabel.Font = Enum.Font.Gotham
+	statusLabel.TextSize = 12
+	statusLabel.TextWrapped = true
+	statusLabel.TextYAlignment = Enum.TextYAlignment.Top
+
+	local infoLabel = Instance.new("TextLabel", mainFrame)
+	infoLabel.Size = UDim2.new(0.9, 0, 0, 30)
+	infoLabel.Position = UDim2.new(0.05, 0, 0, 260)
+	infoLabel.Text = "Made by Razzles | Star Life Farmer v2.0"
+	infoLabel.TextColor3 = Color3.fromRGB(120, 120, 120)
+	infoLabel.BackgroundTransparency = 1
+	infoLabel.Font = Enum.Font.Gotham
+	infoLabel.TextSize = 10
+
+	verifyButton.MouseButton1Click:Connect(function()
+		local enteredKey = keyInput.Text:gsub("%s+", "") 
+		if enteredKey == "" then
+			statusLabel.Text = "❌ Please enter a key."
+			statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
 			return
 		end
-		l_101_0.Text = l_66_0(l_43_0)
-		l_101_0.TextColor3 = Color3.fromRGB(255, 200, 0)
-		l_97_0.Text = l_66_0(l_44_0)
-		l_97_0.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
-		wait(0.5)
-		local l_104_0, l_105_0 = l_81_0(l_103_0)
-		if l_104_0 then
-			_G[l_66_0(l_5_0)] = l_103_0
-			_G[l_66_0(l_6_0)] = true
-			l_101_0.Text = l_66_0(l_45_0)
-			l_101_0.TextColor3 = Color3.fromRGB(100, 255, 100)
-			l_77_0(l_66_0(l_24_0), l_66_0(l_46_0), 3)
+
+		statusLabel.Text = "🔄 Verifying key..."
+		statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+		verifyButton.Text = "Verifying..."
+		verifyButton.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+
+		wait(0.5) 
+
+		local isValid, reason = verifyKey(enteredKey)
+		if isValid then
+			_G.CurrentKey = enteredKey
+			_G.KeyVerified = true
+			statusLabel.Text = "✅ Key verified successfully! Loading script..."
+			statusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+
+			sendNotification("Key System", "Key verified! Loading Star Life Farmer...", 3)
+
 			wait(1)
-			l_88_0:Destroy()
-			local l_106_0, l_107_0 = pcall(function()
-				loadstring(game:HttpGet(l_66_0(l_47_0)))()
-				_G[l_66_0(l_7_0)] = true
+			screenGui:Destroy()
+
+			local success, err = pcall(function()
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/main.luau"))()
+				_G.ScriptLoaded = true
 			end)
-			if not l_106_0 then
-				l_101_0.Text = l_66_0(l_48_0) .. tostring(l_107_0)
-				l_101_0.TextColor3 = Color3.fromRGB(255, 100, 100)
-				l_77_0(l_66_0(l_24_0), l_66_0(l_49_0), 5)
+
+			if not success then
+				statusLabel.Text = "❌ Failed to load script: " .. tostring(err)
+				statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+				sendNotification("Key System", "Failed to load script!", 5)
 			end
 		else
-			l_101_0.Text = l_66_0(l_50_0) .. tostring(l_105_0)
-			l_101_0.TextColor3 = Color3.fromRGB(255, 100, 100)
-			l_97_0.Text = l_66_0(l_37_0)
-			l_97_0.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
-			l_77_0(l_66_0(l_24_0), l_66_0(l_51_0) .. tostring(l_105_0), 5)
+			statusLabel.Text = "❌ " .. tostring(reason)
+			statusLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+			verifyButton.Text = "✓ Verify Key"
+			verifyButton.BackgroundColor3 = Color3.fromRGB(0, 120, 215)
+			sendNotification("Key System", "Key verification failed: " .. tostring(reason), 5)
 		end
 	end)
-	l_99_0.MouseButton1Click:Connect(function()
-		local l_108_0 = pcall(function()
-			setclipboard(l_74_0)
+
+	getKeyButton.MouseButton1Click:Connect(function()
+
+		local success = pcall(function()
+			setclipboard(SERVER_URL)
 		end)
-		if l_108_0 then
-			l_101_0.Text = l_66_0(l_53_0)
-			l_101_0.TextColor3 = Color3.fromRGB(100, 255, 100)
-			l_77_0(l_66_0(l_24_0), l_66_0(l_54_0), 7)
+
+		if success then
+			statusLabel.Text =
+				"📋 Key link copied to clipboard!\nPaste it in your browser and follow the steps to get your key."
+			statusLabel.TextColor3 = Color3.fromRGB(100, 255, 100)
+			sendNotification("Key System", "Key link copied to clipboard! Paste in browser to get your key.", 7)
 		else
-			l_101_0.Text = l_66_0(l_55_0) .. l_74_0
-			l_101_0.TextColor3 = Color3.fromRGB(255, 200, 0)
-			l_77_0(l_66_0(l_24_0), l_66_0(l_56_0) .. l_74_0 .. l_66_0(l_57_0), 7)
+			statusLabel.Text = "❌ Clipboard not supported. Visit: " .. SERVER_URL
+			statusLabel.TextColor3 = Color3.fromRGB(255, 200, 0)
+			sendNotification("Key System", "Visit " .. SERVER_URL .. " to get your key", 7)
 		end
 	end)
-	local l_109_0 = nil
-	local l_110_0 = 0.25
-	local l_111_0 = nil
-	local l_112_0 = nil
-	local function l_113_0(l_114_0)
-		local l_115_0 = l_114_0.Position - l_111_0
-		local l_116_0 =
-			UDim2.new(l_112_0.X.Scale, l_112_0.X.Offset + l_115_0.X, l_112_0.Y.Scale, l_112_0.Y.Offset + l_115_0.Y)
-		game:GetService("TweenService"):Create(l_89_0, TweenInfo.new(l_110_0), { Position = l_116_0 }):Play()
+
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
+
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position =
+			UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService("TweenService"):Create(mainFrame, TweenInfo.new(dragSpeed), { Position = position }):Play()
 	end
-	l_92_0.InputBegan:Connect(function(l_117_0)
+
+	title.InputBegan:Connect(function(input)
 		if
-			l_117_0.UserInputType == Enum.UserInputType.MouseButton1
-			or l_117_0.UserInputType == Enum.UserInputType.Touch
+			input.UserInputType == Enum.UserInputType.MouseButton1
+			or input.UserInputType == Enum.UserInputType.Touch
 		then
-			l_109_0 = true
-			l_111_0 = l_117_0.Position
-			l_112_0 = l_89_0.Position
-			l_117_0.Changed:Connect(function()
-				if l_117_0.UserInputState == Enum.UserInputState.End then
-					l_109_0 = false
+			dragToggle = true
+			dragStart = input.Position
+			startPos = mainFrame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
 				end
 			end)
 		end
 	end)
-	l_92_0.InputChanged:Connect(function(l_118_0)
+
+	title.InputChanged:Connect(function(input)
 		if
-			l_118_0.UserInputType == Enum.UserInputType.MouseMovement
-			or l_118_0.UserInputType == Enum.UserInputType.Touch
+			input.UserInputType == Enum.UserInputType.MouseMovement
+			or input.UserInputType == Enum.UserInputType.Touch
 		then
-			if l_109_0 then
-				l_113_0(l_118_0)
+			if dragToggle then
+				updateInput(input)
 			end
 		end
 	end)
 end
-local function l_119_0()
+
+local function startKeyVerificationLoop()
 	coroutine.wrap(function()
-		while wait(300) do
-			if _G[l_66_0(l_5_0)] and _G[l_66_0(l_6_0)] then
-				local l_120_0, l_121_0 = l_81_0(_G[l_66_0(l_5_0)])
-				if not l_120_0 then
-					warn(l_66_0(l_58_0) .. tostring(l_121_0))
+		while wait(300) do 
+			if _G.CurrentKey and _G.KeyVerified then
+				local isValid, reason = verifyKey(_G.CurrentKey)
+				if not isValid then
+					warn("Key System: Key verification failed - " .. tostring(reason))
+
 					pcall(function()
-						l_70_0:PostAsync(
-							l_74_0 .. l_66_0(l_59_0),
-							l_70_0:JSONEncode({
-								[l_66_0(l_16_0)] = tostring(l_73_0.UserId),
-								[l_66_0(l_15_0)] = _G[l_66_0(l_5_0)],
-								[l_66_0(l_60_0)] = l_66_0(l_61_0),
-								[l_66_0(l_62_0)] = tostring(l_121_0),
+						HttpService:PostAsync(
+							SERVER_URL .. "/log-key-validation",
+							HttpService:JSONEncode({
+								roblox_id = tostring(player.UserId),
+								key = _G.CurrentKey,
+								validation_result = "failed",
+								failure_reason = tostring(reason),
 							}),
 							Enum.HttpContentType.ApplicationJson
 						)
 					end)
-					l_87_0()
-					l_86_0()
+
+					unloadScript()
+
+					createUI()
 					break
 				end
 			end
 		end
 	end)()
 end
+
 function _G.ShowKeyUI()
-	l_86_0()
+	createUI()
 end
+
 function _G.StarLifeKeySystemUnload()
-	l_87_0()
+	unloadScript()
 end
-l_86_0()
-l_119_0()
-l_77_0(l_66_0(l_24_0), l_66_0(l_65_0), 3)
+
+createUI()
+startKeyVerificationLoop()
+
+sendNotification("Key System", "Star Life Farmer Key System loaded!", 3)
