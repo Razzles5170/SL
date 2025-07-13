@@ -1,43 +1,101 @@
--- Star Life Farmer Script with Integrated Key System and Anti-Bypass Protection
+
+
+-- Initialize services and globals
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local SERVER_URL = "https://key.razzles.xyz"
+
+-- Function to get user ID safely
+local function getUserId()
+	if player and player.UserId and player.UserId ~= 0 then
+		return tostring(player.UserId)
+	elseif player and player.Name and player.Name ~= "" then
+		return "name:" .. player.Name
+	else
+		return "temp:" .. tostring(math.random(100000, 999999))
+	end
+end
+
+-- HTTP request function using exploit request functions (same as loader)
+local function makeHttpRequest(url, method, data)
+	local httpRequest = nil
+
+	-- Try to get the appropriate HTTP request function (same order as loader)
+	if syn and syn.request then
+		httpRequest = syn.request
+	elseif http and http.request then
+		httpRequest = http.request
+	elseif http_request then
+		httpRequest = http_request
+	elseif request then
+		httpRequest = request
+	end
+
+	if not httpRequest then
+		-- Fallback to HttpService
+		if method == "POST" and data then
+			local success, response = pcall(function()
+				return HttpService:PostAsync(url, HttpService:JSONEncode(data), Enum.HttpContentType.ApplicationJson)
+			end)
+			if success then
+				return response, 200
+			else
+				return nil, tostring(response)
+			end
+		end
+		return nil, "HTTP request function not found"
+	end
+
+	local requestData = {
+		Url = url,
+		Method = method or "GET",
+		Headers = {
+			["Content-Type"] = "application/json",
+			["User-Agent"] = "StarLifeFarmer/2.0",
+		},
+	}
+
+	if data then
+		requestData.Body = HttpService:JSONEncode(data)
+	end
+
+	local success, response = pcall(function()
+		return httpRequest(requestData)
+	end)
+
+	if success and response then
+		return response.Body, response.StatusCode
+	else
+		return nil, tostring(response)
+	end
+end
 
 -- Anti-bypass protection - Check if loader authenticated this session
+print("DEBUG: Checking loader authentication...")
+print("  getgenv().StarLifeKey exists:", getgenv().StarLifeKey ~= nil)
+if getgenv().StarLifeKey then
+	print("  LoaderAuthenticated:", getgenv().StarLifeKey.LoaderAuthenticated)
+	print("  SecurityToken:", getgenv().StarLifeKey.SecurityToken)
+	print("  CurrentKey:", getgenv().StarLifeKey.CurrentKey ~= nil)
+	print("  KeyVerified:", getgenv().StarLifeKey.KeyVerified)
+end
+
 if
 	not getgenv().StarLifeKey
 	or not getgenv().StarLifeKey.LoaderAuthenticated
 	or not getgenv().StarLifeKey.SecurityToken
 then
-	local HttpService = game:GetService("HttpService")
-	local Players = game:GetService("Players")
-	local player = Players.LocalPlayer
-	local SERVER_URL = "https://key.razzles.xyz"
-
-	-- Function to get user ID safely
-	local function getUserId()
-		if player and player.UserId and player.UserId ~= 0 then
-			return tostring(player.UserId)
-		elseif player and player.Name and player.Name ~= "" then
-			return "name:" .. player.Name
-		else
-			return "temp:" .. tostring(math.random(100000, 999999))
-		end
-	end
-
 	local bypassReason = "Script executed without loader authentication"
 	if not getgenv().StarLifeKey or not getgenv().StarLifeKey.SecurityToken then
 		bypassReason = bypassReason .. " - Security token missing (possible tampering)"
-	end
-
-	-- Log the bypass attempt to the server
+	end -- Log the bypass attempt to the server
 	pcall(function()
-		HttpService:PostAsync(
-			SERVER_URL .. "/log-bypass-attempt",
-			HttpService:JSONEncode({
-				roblox_id = getUserId(),
-				reason = bypassReason,
-				additional_info = "Direct script execution detected",
-			}),
-			Enum.HttpContentType.ApplicationJson
-		)
+		makeHttpRequest(SERVER_URL .. "/log-bypass-attempt", "POST", {
+			roblox_userid = getUserId(),
+			reason = bypassReason,
+			additional_info = "Direct script execution detected",
+		})
 	end)
 
 	-- Kick the player for trying to bypass
@@ -63,6 +121,14 @@ then
 end
 
 -- Verify we have a valid key before proceeding
+print("DEBUG: Checking key verification...")
+if getgenv().StarLifeKey then
+	print("  CurrentKey exists:", getgenv().StarLifeKey.CurrentKey ~= nil)
+	print("  KeyVerified:", getgenv().StarLifeKey.KeyVerified)
+else
+	print("  StarLifeKey table does not exist!")
+end
+
 if not getgenv().StarLifeKey or not getgenv().StarLifeKey.CurrentKey or not getgenv().StarLifeKey.KeyVerified then
 	local HttpService = game:GetService("HttpService")
 	local Players = game:GetService("Players")
@@ -78,18 +144,12 @@ if not getgenv().StarLifeKey or not getgenv().StarLifeKey.CurrentKey or not getg
 		else
 			return "temp:" .. tostring(math.random(100000, 999999))
 		end
-	end
-
-	-- Log this as a potential bypass attempt (no key but script loaded)
+	end -- Log this as a potential bypass attempt (no key but script loaded)
 	pcall(function()
-		HttpService:PostAsync(
-			SERVER_URL .. "/log-bypass-attempt",
-			HttpService:JSONEncode({
-				roblox_id = getUserId(),
-				reason = "Script loaded without valid key - Possible key bypass or loader malfunction",
-			}),
-			Enum.HttpContentType.ApplicationJson
-		)
+		makeHttpRequest(SERVER_URL .. "/log-bypass-attempt", "POST", {
+			roblox_userid = getUserId(),
+			reason = "Script loaded without valid key - Possible key bypass or loader malfunction",
+		})
 	end)
 
 	pcall(function()
@@ -176,52 +236,29 @@ local function getUserId()
 	end
 end
 
+-- Helper function for HTTP requests (same as loader)
 -- Key verification function (same as loader)
 local function verifyKey(keyToVerify)
-	local success, response = pcall(function()
-		return HttpService:PostAsync(
-			SERVER_URL .. "/verify-key",
-			HttpService:JSONEncode({
-				key = keyToVerify,
-				roblox_id = getUserId(),
-			}),
-			Enum.HttpContentType.ApplicationJson
-		)
-	end)
+	local responseBody, statusCode = makeHttpRequest(SERVER_URL .. "/verify-key", "POST", {
+		key = keyToVerify,
+		roblox_userid = getUserId(),
+		exploit = "client-side",
+	})
 
-	if success then
-		local data = HttpService:JSONDecode(response)
-		return data.valid, data.reason
+	if responseBody then
+		local success, data = pcall(function()
+			return HttpService:JSONDecode(responseBody)
+		end)
+
+		if success and data then
+			return data.valid, data.reason
+		else
+			return false, "Invalid server response"
+		end
 	else
-		return false, "Failed to connect to server: " .. tostring(response)
+		return false, "Failed to connect to server: " .. tostring(statusCode)
 	end
 end
-
--- Continuous key verification (every 5 minutes)
-coroutine.wrap(function()
-	while wait(300) do -- Check every 5 minutes
-		if getgenv().StarLifeKey and getgenv().StarLifeKey.CurrentKey then
-			local isValid, reason = verifyKey(getgenv().StarLifeKey.CurrentKey)
-			if not isValid then
-				warn("Star Life Farmer: Key verification failed - " .. tostring(reason))
-				if getgenv().StarLifeFarmerUnload then
-					getgenv().StarLifeFarmerUnload()
-				end
-				-- Show key UI again
-				if getgenv().ShowKeyUI then
-					getgenv().ShowKeyUI()
-				end
-				break
-			end
-		else
-			-- No key found, unload
-			if getgenv().StarLifeFarmerUnload then
-				getgenv().StarLifeFarmerUnload()
-			end
-			break
-		end
-	end
-end)()
 
 local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
 
@@ -861,6 +898,32 @@ end)
 
 -- Load configuration
 Rayfield:LoadConfiguration()
+
+-- Continuous key verification (every 5 minutes)
+coroutine.wrap(function()
+	while wait(300) do -- Check every 5 minutes
+		if getgenv().StarLifeKey and getgenv().StarLifeKey.CurrentKey then
+			local isValid, reason = verifyKey(getgenv().StarLifeKey.CurrentKey)
+			if not isValid then
+				warn("Star Life Farmer: Key verification failed - " .. tostring(reason))
+				if getgenv().StarLifeFarmerUnload then
+					getgenv().StarLifeFarmerUnload()
+				end
+				-- Show key UI again
+				if getgenv().ShowKeyUI then
+					getgenv().ShowKeyUI()
+				end
+				break
+			end
+		else
+			-- No key found, unload
+			if getgenv().StarLifeFarmerUnload then
+				getgenv().StarLifeFarmerUnload()
+			end
+			break
+		end
+	end
+end)()
 
 warn("Star Life Farmer loaded successfully with valid key!")
 warn(
