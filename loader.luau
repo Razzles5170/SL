@@ -415,7 +415,34 @@ local function startKeyVerificationLoop()
 					end)
 
 					unloadScript()
-					createUI()
+
+					task.wait(1)
+
+					local success = pcall(function()
+						local loaderContent
+						if exploitFunctions.httpRequest then
+							local result = exploitFunctions.httpRequest({
+								Url = "https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/loader.luau",
+								Method = "GET",
+							})
+							loaderContent = result.Body
+						else
+
+							loaderContent = game:GetService("HttpService"):GetAsync(
+								"https://raw.githubusercontent.com/Razzles5170/SL/refs/heads/main/loader.luau"
+							)
+						end
+
+						if exploitFunctions.loadstring then
+							exploitFunctions.loadstring(loaderContent)()
+						end
+					end)
+
+					if not success then
+						warn("Failed to reload loader - creating UI manually")
+						createUI()
+					end
+
 					break
 				end
 			end
