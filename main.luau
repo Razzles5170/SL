@@ -1,6 +1,7 @@
 
 
 -- Initialize services and globals
+local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local SERVER_URL = "https://key.razzles.xyz"
@@ -32,10 +33,10 @@ local function makeHttpRequest(url, method, data)
 	end
 
 	if not httpRequest then
-		-- Fallback to executor's HttpPost/HttpGet
+		-- Fallback to HttpService
 		if method == "POST" and data then
 			local success, response = pcall(function()
-				return game:HttpPost(url, game:JSONEncode(data), true, "application/json")
+				return HttpService:PostAsync(url, HttpService:JSONEncode(data), Enum.HttpContentType.ApplicationJson)
 			end)
 			if success then
 				return response, 200
@@ -56,7 +57,7 @@ local function makeHttpRequest(url, method, data)
 	}
 
 	if data then
-		requestData.Body = game:JSONEncode(data)
+		requestData.Body = HttpService:JSONEncode(data)
 	end
 
 	local success, response = pcall(function()
@@ -213,7 +214,7 @@ local function verifyKey(keyToVerify)
 
 	if responseBody then
 		local success, data = pcall(function()
-			return game:JSONDecode(responseBody)
+			return HttpService:JSONDecode(responseBody)
 		end)
 
 		if success and data then
