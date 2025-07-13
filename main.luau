@@ -1,3 +1,6 @@
+-- Star Life Farmer Script with Integrated Key System and Anti-Bypass Protection
+
+-- Anti-bypass protection - Check if loader authenticated this session
 if
 	not getgenv().StarLifeKey
 	or not getgenv().StarLifeKey.LoaderAuthenticated
@@ -8,16 +11,28 @@ then
 	local player = Players.LocalPlayer
 	local SERVER_URL = "https://key.razzles.xyz"
 
+	-- Function to get user ID safely
+	local function getUserId()
+		if player and player.UserId and player.UserId ~= 0 then
+			return tostring(player.UserId)
+		elseif player and player.Name and player.Name ~= "" then
+			return "name:" .. player.Name
+		else
+			return "temp:" .. tostring(math.random(100000, 999999))
+		end
+	end
+
 	local bypassReason = "Script executed without loader authentication"
 	if not getgenv().StarLifeKey or not getgenv().StarLifeKey.SecurityToken then
 		bypassReason = bypassReason .. " - Security token missing (possible tampering)"
 	end
 
+	-- Log the bypass attempt to the server
 	pcall(function()
 		HttpService:PostAsync(
 			SERVER_URL .. "/log-bypass-attempt",
 			HttpService:JSONEncode({
-				roblox_id = tostring(player.UserId),
+				roblox_id = getUserId(),
 				reason = bypassReason,
 				additional_info = "Direct script execution detected",
 			}),
@@ -25,6 +40,7 @@ then
 		)
 	end)
 
+	-- Kick the player for trying to bypass
 	pcall(function()
 		game:GetService("StarterGui"):SetCore("SendNotification", {
 			Title = "🚫 Bypass Detected",
@@ -35,26 +51,41 @@ then
 
 	warn("BYPASS ATTEMPT DETECTED: " .. bypassReason)
 
+	-- Wait a moment for notification to show, then kick
 	wait(2)
 
+	-- Kick the player
 	pcall(function()
 		game.Players.LocalPlayer:Kick("🚫 Bypass Detected: Use the proper key system loader!")
 	end)
 
-	return 
+	return -- Stop script execution
 end
 
+-- Verify we have a valid key before proceeding
 if not getgenv().StarLifeKey or not getgenv().StarLifeKey.CurrentKey or not getgenv().StarLifeKey.KeyVerified then
 	local HttpService = game:GetService("HttpService")
 	local Players = game:GetService("Players")
 	local player = Players.LocalPlayer
 	local SERVER_URL = "https://key.razzles.xyz"
 
+	-- Function to get user ID safely
+	local function getUserId()
+		if player and player.UserId and player.UserId ~= 0 then
+			return tostring(player.UserId)
+		elseif player and player.Name and player.Name ~= "" then
+			return "name:" .. player.Name
+		else
+			return "temp:" .. tostring(math.random(100000, 999999))
+		end
+	end
+
+	-- Log this as a potential bypass attempt (no key but script loaded)
 	pcall(function()
 		HttpService:PostAsync(
 			SERVER_URL .. "/log-bypass-attempt",
 			HttpService:JSONEncode({
-				roblox_id = tostring(player.UserId),
+				roblox_id = getUserId(),
 				reason = "Script loaded without valid key - Possible key bypass or loader malfunction",
 			}),
 			Enum.HttpContentType.ApplicationJson
@@ -72,8 +103,9 @@ if not getgenv().StarLifeKey or not getgenv().StarLifeKey.CurrentKey or not getg
 	return
 end
 
+-- Global unload function for key system
 getgenv().StarLifeFarmerUnload = function()
-
+	-- Stop all farming loops
 	if rareClickLoop then
 		rareClickLoop = false
 	end
@@ -95,14 +127,17 @@ getgenv().StarLifeFarmerUnload = function()
 		crateSettings.rare = false
 	end
 
+	-- Destroy UI
 	if Rayfield then
 		pcall(function()
 			Rayfield:Destroy()
 		end)
 	end
 
+	-- Reset authentication flag
 	getgenv().StarLifeKey.LoaderAuthenticated = false
 
+	-- Send notification
 	pcall(function()
 		game:GetService("StarterGui"):SetCore("SendNotification", {
 			Title = "Key System",
@@ -121,6 +156,7 @@ local player = Players.LocalPlayer
 
 local SERVER_URL = "https://key.razzles.xyz"
 
+-- Send notification that script is loading
 pcall(function()
 	StarterGui:SetCore("SendNotification", {
 		Title = "Star Life Farmer",
@@ -129,13 +165,25 @@ pcall(function()
 	})
 end)
 
+-- Function to get user ID safely
+local function getUserId()
+	if player and player.UserId and player.UserId ~= 0 then
+		return tostring(player.UserId)
+	elseif player and player.Name and player.Name ~= "" then
+		return "name:" .. player.Name
+	else
+		return "temp:" .. tostring(math.random(100000, 999999))
+	end
+end
+
+-- Key verification function (same as loader)
 local function verifyKey(keyToVerify)
 	local success, response = pcall(function()
 		return HttpService:PostAsync(
 			SERVER_URL .. "/verify-key",
 			HttpService:JSONEncode({
 				key = keyToVerify,
-				roblox_id = tostring(player.UserId),
+				roblox_id = getUserId(),
 			}),
 			Enum.HttpContentType.ApplicationJson
 		)
@@ -149,8 +197,9 @@ local function verifyKey(keyToVerify)
 	end
 end
 
+-- Continuous key verification (every 5 minutes)
 coroutine.wrap(function()
-	while wait(300) do 
+	while wait(300) do -- Check every 5 minutes
 		if getgenv().StarLifeKey and getgenv().StarLifeKey.CurrentKey then
 			local isValid, reason = verifyKey(getgenv().StarLifeKey.CurrentKey)
 			if not isValid then
@@ -158,14 +207,14 @@ coroutine.wrap(function()
 				if getgenv().StarLifeFarmerUnload then
 					getgenv().StarLifeFarmerUnload()
 				end
-
+				-- Show key UI again
 				if getgenv().ShowKeyUI then
 					getgenv().ShowKeyUI()
 				end
 				break
 			end
 		else
-
+			-- No key found, unload
 			if getgenv().StarLifeFarmerUnload then
 				getgenv().StarLifeFarmerUnload()
 			end
@@ -175,6 +224,9 @@ coroutine.wrap(function()
 end)()
 
 local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+
+-- Key system is now handled by loader.luau
+-- The main script is loaded after successful key verification
 
 local rareClickLoop = false
 local presentClickLoop = false
@@ -218,6 +270,8 @@ local Window = Rayfield:CreateWindow({
 
 	KeySystem = false,
 })
+
+-- The unload function is no longer needed here as the loader handles it.
 
 local CrateTab = Window:CreateTab("Crate Farm", 4483362458)
 local ItemTab = Window:CreateTab("Items", 4483362458)
@@ -805,6 +859,7 @@ RunService.Heartbeat:Connect(function()
 	StatusLabel:Set(statusText)
 end)
 
+-- Load configuration
 Rayfield:LoadConfiguration()
 
 warn("Star Life Farmer loaded successfully with valid key!")
@@ -815,6 +870,7 @@ warn(
 		.. tostring(getconnections ~= nil)
 )
 
+-- Send final notification
 pcall(function()
 	StarterGui:SetCore("SendNotification", {
 		Title = "Star Life Farmer",
