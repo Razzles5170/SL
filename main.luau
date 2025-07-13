@@ -227,7 +227,48 @@ local function verifyKey(keyToVerify)
 	end
 end
 
-local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+-- Load Rayfield UI library with error handling
+local Rayfield = nil
+local success, result = pcall(function()
+	local rayfieldCode = nil
+
+	-- Try to get Rayfield using makeHttpRequest function
+	local responseBody, _statusCode = makeHttpRequest("https://sirius.menu/rayfield", "GET")
+	if responseBody then
+		rayfieldCode = responseBody
+	end
+
+	-- Fallback to HttpService if makeHttpRequest failed
+	if not rayfieldCode then
+		local httpSuccess, httpResponse = pcall(function()
+			return HttpService:GetAsync("https://sirius.menu/rayfield")
+		end)
+		if httpSuccess then
+			rayfieldCode = httpResponse
+		end
+	end
+
+	-- Try to load the code using loadstring
+	if rayfieldCode and loadstring then
+		return loadstring(rayfieldCode)()
+	end
+
+	return nil
+end)
+
+if success and result then
+	Rayfield = result
+else
+	warn("Failed to load Rayfield UI library: " .. tostring(result))
+	pcall(function()
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "Error",
+			Text = "Failed to load UI library. Script may not work properly.",
+			Duration = 5,
+		})
+	end)
+	return
+end
 
 -- Key system is now handled by loader.luau
 -- The main script is loaded after successful key verification
@@ -900,7 +941,7 @@ warn(
 
 -- Send final notification
 pcall(function()
-	StarterGui:SetCore("SendNotification", {
+	game:GetService("StarterGui"):SetCore("SendNotification", {
 		Title = "Star Life Farmer",
 		Text = "Script loaded successfully! Use 'K' to toggle UI.",
 		Duration = 5,
