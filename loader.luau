@@ -33,6 +33,39 @@ elseif load then
 	exploitFunctions.loadstring = load
 end
 
+local function getUserId()
+
+	if player and player.UserId and player.UserId ~= 0 then
+		return tostring(player.UserId)
+	end
+
+	local success1, userId1 = pcall(function()
+		local localPlayer = game:GetService("Players").LocalPlayer
+		if localPlayer and localPlayer.UserId and localPlayer.UserId ~= 0 then
+			return tostring(localPlayer.UserId)
+		end
+	end)
+
+	if success1 and userId1 then
+		return userId1
+	end
+
+	local success2, playerName = pcall(function()
+		if player and player.Name and player.Name ~= "" then
+			return player.Name
+		elseif game:GetService("Players").LocalPlayer and game:GetService("Players").LocalPlayer.Name then
+			return game:GetService("Players").LocalPlayer.Name
+		end
+	end)
+
+	if success2 and playerName then
+		return "name:" .. playerName
+	end
+
+	warn("Could not get user ID, using temporary identifier")
+	return "temp:" .. tostring(math.random(100000, 999999))
+end
+
 getgenv().StarLifeKey = {
 	CurrentKey = nil,
 	KeyVerified = false,
@@ -82,9 +115,10 @@ local function makeHttpRequest(url, method, data)
 end
 
 local function verifyKey(keyToVerify)
+	local userId = getUserId()
 	local responseBody, statusCode = makeHttpRequest(SERVER_URL .. "/verify-key", "POST", {
 		key = keyToVerify,
-		roblox_id = tostring(player.UserId),
+		roblox_id = userId,
 		exploit = "client-side",
 	})
 
@@ -102,7 +136,7 @@ local function verifyKey(keyToVerify)
 
 		pcall(function()
 			makeHttpRequest(SERVER_URL .. "/log-bypass-attempt", "POST", {
-				roblox_id = tostring(player.UserId),
+				roblox_id = getUserId(),
 				reason = "Failed to connect to key verification server",
 				error = tostring(statusCode),
 			})
@@ -403,11 +437,10 @@ local function startKeyVerificationLoop()
 			if getgenv().StarLifeKey.CurrentKey and getgenv().StarLifeKey.KeyVerified then
 				local isValid, reason = verifyKey(getgenv().StarLifeKey.CurrentKey)
 				if not isValid then
-					warn("Key System: Key verification failed - " .. tostring(reason))
-
+					warn("Key System: Key verification failed - " .. tostring(reason)) 
 					pcall(function()
 						makeHttpRequest(SERVER_URL .. "/log-key-validation", "POST", {
-							roblox_id = tostring(player.UserId),
+							roblox_id = getUserId(),
 							key = getgenv().StarLifeKey.CurrentKey,
 							validation_result = "failed",
 							failure_reason = tostring(reason),
