@@ -1,7 +1,6 @@
 
 
 -- Initialize services and globals
-local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local SERVER_URL = "https://key.razzles.xyz"
@@ -33,10 +32,10 @@ local function makeHttpRequest(url, method, data)
 	end
 
 	if not httpRequest then
-		-- Fallback to HttpService
+		-- Fallback to executor's HttpPost/HttpGet
 		if method == "POST" and data then
 			local success, response = pcall(function()
-				return HttpService:PostAsync(url, HttpService:JSONEncode(data), Enum.HttpContentType.ApplicationJson)
+				return game:HttpPost(url, game:JSONEncode(data), true, "application/json")
 			end)
 			if success then
 				return response, 200
@@ -57,7 +56,7 @@ local function makeHttpRequest(url, method, data)
 	}
 
 	if data then
-		requestData.Body = HttpService:JSONEncode(data)
+		requestData.Body = game:JSONEncode(data)
 	end
 
 	local success, response = pcall(function()
@@ -130,21 +129,7 @@ else
 end
 
 if not getgenv().StarLifeKey or not getgenv().StarLifeKey.CurrentKey or not getgenv().StarLifeKey.KeyVerified then
-	local HttpService = game:GetService("HttpService")
-	local Players = game:GetService("Players")
-	local player = Players.LocalPlayer
-	local SERVER_URL = "https://key.razzles.xyz"
-
-	-- Function to get user ID safely
-	local function getUserId()
-		if player and player.UserId and player.UserId ~= 0 then
-			return tostring(player.UserId)
-		elseif player and player.Name and player.Name ~= "" then
-			return "name:" .. player.Name
-		else
-			return "temp:" .. tostring(math.random(100000, 999999))
-		end
-	end -- Log this as a potential bypass attempt (no key but script loaded)
+	-- Log this as a potential bypass attempt (no key but script loaded)
 	pcall(function()
 		makeHttpRequest(SERVER_URL .. "/log-bypass-attempt", "POST", {
 			roblox_userid = getUserId(),
@@ -209,34 +194,15 @@ getgenv().StarLifeFarmerUnload = function()
 	warn("Star Life Farmer: Script unloaded due to key validation failure")
 end
 
-local HttpService = game:GetService("HttpService")
-local Players = game:GetService("Players")
-local StarterGui = game:GetService("StarterGui")
-local player = Players.LocalPlayer
-
-local SERVER_URL = "https://key.razzles.xyz"
-
 -- Send notification that script is loading
 pcall(function()
-	StarterGui:SetCore("SendNotification", {
+	game:GetService("StarterGui"):SetCore("SendNotification", {
 		Title = "Star Life Farmer",
 		Text = "Loading script with valid key...",
 		Duration = 3,
 	})
 end)
 
--- Function to get user ID safely
-local function getUserId()
-	if player and player.UserId and player.UserId ~= 0 then
-		return tostring(player.UserId)
-	elseif player and player.Name and player.Name ~= "" then
-		return "name:" .. player.Name
-	else
-		return "temp:" .. tostring(math.random(100000, 999999))
-	end
-end
-
--- Helper function for HTTP requests (same as loader)
 -- Key verification function (same as loader)
 local function verifyKey(keyToVerify)
 	local responseBody, statusCode = makeHttpRequest(SERVER_URL .. "/verify-key", "POST", {
@@ -247,7 +213,7 @@ local function verifyKey(keyToVerify)
 
 	if responseBody then
 		local success, data = pcall(function()
-			return HttpService:JSONDecode(responseBody)
+			return game:JSONDecode(responseBody)
 		end)
 
 		if success and data then
@@ -277,9 +243,7 @@ local crateSettings = {
 	rare = false,
 }
 
-local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
-local player = Players.LocalPlayer
 
 local Window = Rayfield:CreateWindow({
 	Name = "Key System Farmer",
@@ -566,7 +530,7 @@ end
 local function enableAntiAFK()
 	local GC = getconnections or get_signal_cons
 	if GC then
-		for i, v in pairs(GC(Players.LocalPlayer.Idled)) do
+		for i, v in pairs(GC(player.Idled)) do
 			if v["Disable"] then
 				v["Disable"](v)
 			elseif v["Disconnect"] then
@@ -576,7 +540,7 @@ local function enableAntiAFK()
 		warn("Auto-Clicker: Anti-AFK enabled using getconnections method")
 	else
 		local VirtualUser = cloneref(game:GetService("VirtualUser"))
-		Players.LocalPlayer.Idled:Connect(function()
+		player.Idled:Connect(function()
 			if antiAfkEnabled then
 				VirtualUser:CaptureController()
 				VirtualUser:ClickButton2(Vector2.new())
